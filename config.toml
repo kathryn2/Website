@@ -1,8 +1,8 @@
-baseurl = "https://k22daugherty.netlify.com"
+baseurl = ""
 theme = "hugo-geo"
-relativeURLs = true
+relativeURLs = false
 languageCode = "en-us"
-title = "Kathryn's Site"
+title = "Hello World!"
 disqusShortname = ""
 paginate = 5
 
