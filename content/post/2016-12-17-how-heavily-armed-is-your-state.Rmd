@@ -70,7 +70,7 @@ boxplot2
 boxplot2 + coord_flip() + theme_wsj()
 ```
 
-![](/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png)
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png">"
 
 Now let's step back a level of detail and see if there are similarities in Census Regions.
 
@@ -84,7 +84,7 @@ boxplot3
 boxplot3 + coord_flip() + theme_wsj()
 ```
 
-![](/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png)
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png">"
 
 Next, let's dive into state-level detail to see the outliers.
 
@@ -106,7 +106,7 @@ barplot
 barplot + theme_wsj() + coord_flip()
 ```
 
-![](/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png)
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png">
 
 What does this look like on a map?  Do we see any regional trends?
 
@@ -126,7 +126,7 @@ map <- map + theme_map()
 map
 ```
 
-![](/post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png)
+<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png">
 
 Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?
 
@@ -149,7 +149,7 @@ barplot2 <- barplot2 + theme_wsj() + coord_flip()
 barplot2
 ```
 
-![](/post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png)
+<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png">
 
 In summation, we find the following:
 <li>Wyoming has, by far, the highest percentage of residents who are registered gun owners

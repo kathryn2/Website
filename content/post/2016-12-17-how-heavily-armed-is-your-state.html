@@ -56,10 +56,7 @@ boxplot2 &lt;- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
 boxplot2
 
 boxplot2 + coord_flip() + theme_wsj()</code></pre>
-<div class="figure">
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png" />
-
-</div>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png">&quot;</p>
 <p>Now let’s step back a level of detail and see if there are similarities in Census Regions.</p>
 <pre><code>boxplot3 &lt;- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
@@ -68,10 +65,7 @@ boxplot2 + coord_flip() + theme_wsj()</code></pre>
 boxplot3
 
 boxplot3 + coord_flip() + theme_wsj()</code></pre>
-<div class="figure">
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png" />
-
-</div>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png">&quot;</p>
 <p>Next, let’s dive into state-level detail to see the outliers.</p>
 <pre><code># Bar plot by state
 
@@ -88,10 +82,7 @@ barplot &lt;- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
 barplot
 
 barplot + theme_wsj() + coord_flip()</code></pre>
-<div class="figure">
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png" />
-
-</div>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png"></p>
 <p>What does this look like on a map? Do we see any regional trends?</p>
 <pre><code>Firearms_Data_KAD$region &lt;- Firearms_Data_KAD$StateLower
   
@@ -106,10 +97,7 @@ map &lt;- state_choropleth(
 
 map &lt;- map + theme_map()
 map</code></pre>
-<div class="figure">
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png" />
-
-</div>
+<p><img src="post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png"></p>
 <p>Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?</p>
 <pre><code># Average by Region
 
@@ -127,10 +115,7 @@ barplot2 &lt;- qplot(Division, data=regiondata, geom=&quot;bar&quot;,
                   weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;)
 barplot2 &lt;- barplot2 + theme_wsj() + coord_flip()
 barplot2</code></pre>
-<div class="figure">
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png" />
-
-</div>
+<p><img src="post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png"></p>
 In summation, we find the following:
 <li>
 Wyoming has, by far, the highest percentage of residents who are registered gun owners
