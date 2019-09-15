@@ -1,8 +1,8 @@
-+++
-title = "About Me"
-draft = false 
-date = '2019-09-14'
-+++
+---
+title: "About Me"
+draft: false 
+date: '2019-09-14'
+---
 
 Kathryn Daugherty is analytics professional who specializes in price optimization.  She received her MS in <a href="https://sps.northwestern.edu/masters/data-science/">predictive analytics</a> from Northwestern University, her <a href="https://www.rollins.edu/business/mba-programs/early-advantage-mba/">MBA</a> with specializations in finance and management from Rollins College and a BA in <a href="https://www.colorado.edu/economics/">economics</a> from the University of Colorado at Boulder. 
 
