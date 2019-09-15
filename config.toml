@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 baseurl = "https://k22daugherty.netlify.com/"
 theme = "hugo-geo"
 relativeURLs = true
 languageCode = "en-us"
 title = "Hello World!"
 disqusShortname = ""
+=======
+theme = "hugo-geo"
+relativeURLs = true
+languageCode = "en-us"
+title = "Kathryn's Site"
+disqusShortname = "shortcode-here"
+>>>>>>> parent of 53a9289... restore
 paginate = 5
 
 #[taxonomies]
