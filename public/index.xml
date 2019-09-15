@@ -12,22 +12,14 @@
     
     
     <item>
-      <title>Death Row Last Words</title>
-      <link>/post/death-row-last-words/</link>
-      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/death-row-last-words/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Last Words from Death Row</title>
       <link>/post/last-words-from-death-row/</link>
       <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/last-words-from-death-row/</guid>
-      <description>From Kaggle, we get a data set including last words from Texas death row inmates. It has names, ages, race, county, date and statements for each person spanning from 1982 to 2017. We&amp;rsquo;re going to use R to identify common words/themes.
-# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset # offenders &amp;lt;- read.table(&amp;quot;Last_Statement.txt&amp;quot;) offenders &amp;lt;- readLines(file.choose()) head(offenders)  Let&amp;rsquo;s load required R packages and make a text corpus.</description>
+      <description>A Kaggle data source here provides the public with information on Texas death row inmates from 1982 to 2017. It includes name, age, race, county, date, and last words from each person. We will analyze this using R to conduct text analysis.
+Let’s load up tidytext to get started and then pull in the text data file.
+# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset offenders &amp;lt;- read.</description>
     </item>
     
     <item>
@@ -78,15 +70,6 @@ each of hugo-geo&amp;rsquo;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt
       <guid>/about/</guid>
       <description>Kathryn Daugherty is analytics professional who specializes in price optimization. She received her MS in predictive analytics from Northwestern University, her MBA with specializations in finance and management from Rollins College and a BA in economics from the University of Colorado at Boulder.
 Daugherty is certified in project management (PMP), lean six sigma and restaurant revenue management (Cornell). Hobbies include travel (especially new destinations), technology, video games, sports (football and tennis), and spending time with her wife and dog.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/post/2017-11-25-last-words-from-death-row/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2017-11-25-last-words-from-death-row/</guid>
-      <description>Last Words from Death Row       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
   </channel>
