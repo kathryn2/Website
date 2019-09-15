@@ -106,16 +106,24 @@
 
 	<article>
 		
+<<<<<<< HEAD
 
 
 <p>We will answer this question using R. First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013). This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.</p>
 <pre class="r"><code># Set working directory
+=======
+
+
+<p>We will answer this question using R. First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013). This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.</p>
+<pre><code># Set working directory
+>>>>>>> parent of d737dd8... cleanup
 setwd(&quot;~/Desktop&quot;)
 
 # Load dataset
 library(readxl)
 Firearms_Data_KAD &lt;- read_excel(&quot;~/Desktop/R/Per Capita Firearms Registered/Firearms_Data_KAD.xlsx&quot;)
 
+<<<<<<< HEAD
 head(Firearms_Data_KAD)</code></pre>
 <pre><code>## # A tibble: 6 x 6
 ##   StateName  StateLower  CensusRegion Division  `2013Pop` `2013Registered…
@@ -128,11 +136,18 @@ head(Firearms_Data_KAD)</code></pre>
 ## 6 Idaho      idaho       West         Mountain    1612136            39019</code></pre>
 <p>Next, let’s load all of the packages we’ll use for data transformations and visualizations.</p>
 <pre class="r"><code># Load needed packages
+=======
+View(Firearms_Data_KAD)</code></pre>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Firearms_Data_KAD.png"></p>
+<p>Next, let’s load all of the packages we’ll use for data transformations and visualizations.</p>
+<pre><code># Load needed packages
+>>>>>>> parent of d737dd8... cleanup
 library(ggplot2)
 library(RColorBrewer)
 library(lattice)
 library(ggthemes)
 library(maps)
+<<<<<<< HEAD
 library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
@@ -160,6 +175,13 @@ library(dplyr)</code></pre>
 ##     apply</code></pre>
 <p>Let’s do some basic analysis and create a preliminary boxplot.</p>
 <pre class="r"><code># Add percentage value
+=======
+library(dplyr)
+library(sqldf)
+library(choroplethr)</code></pre>
+<p>Let’s do some basic analysis and create a preliminary boxplot.</p>
+<pre><code># Add percentage value
+>>>>>>> parent of d737dd8... cleanup
 Firearms_Data_KAD$Pct &lt;- Firearms_Data_KAD$`2013RegisteredOwners`/Firearms_Data_KAD$`2013Pop`
 
 # Add value for ordering bar charts
@@ -171,13 +193,20 @@ boxplot &lt;- bwplot(Pct ~ Division, data=Firearms_Data_KAD,
                   ylab=&quot;PerCapita Registered Gun Owners&quot;,
                   main=&quot;How Heavily Armed is Your Division? (2013)&quot;)
 boxplot</code></pre>
+<<<<<<< HEAD
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Next, let’s use ggplot2 and a Wall Street Journal Theme to make this easier on the eyes.</p>
 <pre class="r"><code># Box and whisker plot using ggplot2
+=======
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Rplot.png"></p>
+<p>Next, let’s use ggplot2 and a Wall Street Journal Theme to make this easier on the eyes.</p>
+<pre><code># Box and whisker plot using ggplot2
+>>>>>>> parent of d737dd8... cleanup
 boxplot2 &lt;- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
   xlab(&quot;US Census Regional Divisions&quot;) + 
   labs(title=&quot;Division Owners&quot;)
+<<<<<<< HEAD
 
 boxplot2 + coord_flip() + theme_wsj()</code></pre>
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -191,11 +220,29 @@ boxplot3 + coord_flip() + theme_wsj()</code></pre>
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Next, let’s dive into state-level detail to see the outliers.</p>
 <pre class="r"><code># Bar plot by state
+=======
+boxplot2
+
+boxplot2 + coord_flip() + theme_wsj()</code></pre>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png">&quot;</p>
+<p>Now let’s step back a level of detail and see if there are similarities in Census Regions.</p>
+<pre><code>boxplot3 &lt;- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
+  geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
+  xlab(&quot;US Census Regions&quot;) + 
+  labs(title=&quot;Regions&quot;)
+boxplot3
+
+boxplot3 + coord_flip() + theme_wsj()</code></pre>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png">&quot;</p>
+<p>Next, let’s dive into state-level detail to see the outliers.</p>
+<pre><code># Bar plot by state
+>>>>>>> parent of d737dd8... cleanup
 
 # Order states
 # states &lt;- c(&quot;Wyoming&quot;, &quot;District of Columbia&quot;, &quot;Arkansas&quot;, &quot;New Mexico&quot;, &quot;Virginia&quot;, &quot;Idaho&quot;, &quot;Alabama&quot;, &quot;Nevada&quot;, &quot;Alaska&quot;, &quot;Louisiana&quot;, &quot;Pennsylvania&quot;, &quot;Maryland&quot;, &quot;New Hampshire&quot;, &quot;Georgia&quot;, &quot;Indiana&quot;, &quot;Kentucky&quot;, &quot;Utah&quot;, &quot;Texas&quot;, &quot;Oklahoma&quot;, &quot;Colorado&quot;, &quot;South Carolina&quot;, &quot;South Dakota&quot;, &quot;Ohio&quot;, &quot;Oregon&quot;, &quot;Connecticut&quot;, &quot;Montana&quot;, &quot;Tennessee&quot;, &quot;North Carolina&quot;, &quot;Kansas&quot;, &quot;Florida&quot;, &quot;Minnesota&quot;, &quot;North Dakota&quot;, &quot;Arizona&quot;, &quot;West Virginia&quot;, &quot;Illinois&quot;, &quot;Maine&quot;, &quot;Washington&quot;, &quot;Missouri&quot;, &quot;Wisconsin&quot;, &quot;California&quot;, &quot;Nebraska&quot;, &quot;Mississippi&quot;, &quot;Vermont&quot;, &quot;Iowa&quot;, &quot;New Jersey&quot;, &quot;Hawaii&quot;, &quot;Massachusetts&quot;, &quot;Michigan&quot;, &quot;Delaware&quot;, &quot;Rhode Island&quot;, &quot;New York&quot;)
 Firearms_Data_KAD$StateName &lt;- factor(Firearms_Data_KAD$StateName, 
                                       levels = Firearms_Data_KAD$StateName[order(Firearms_Data_KAD$Pct)])
+<<<<<<< HEAD
 Firearms_Data_KAD$StateName</code></pre>
 <pre><code>##  [1] Wyoming              District of Columbia Arkansas            
 ##  [4] New Mexico           Virginia             Idaho               
@@ -224,6 +271,20 @@ barplot + theme_wsj() + coord_flip()</code></pre>
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>What does this look like on a map? Do we see any regional trends?</p>
 <pre class="r"><code>Firearms_Data_KAD$region &lt;- Firearms_Data_KAD$StateLower
+=======
+Firearms_Data_KAD$StateName
+
+# Bar plot by state
+barplot &lt;- qplot(StateName, data=Firearms_Data_KAD, geom=&quot;bar&quot;,
+            weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;) 
+barplot &lt;- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
+barplot
+
+barplot + theme_wsj() + coord_flip()</code></pre>
+<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png"></p>
+<p>What does this look like on a map? Do we see any regional trends?</p>
+<pre><code>Firearms_Data_KAD$region &lt;- Firearms_Data_KAD$StateLower
+>>>>>>> parent of d737dd8... cleanup
   
 Firearms_Data_KAD$value &lt;- Firearms_Data_KAD$Pct
 
@@ -234,6 +295,7 @@ map &lt;- state_choropleth(
       num_colors = 1,
       zoom = NULL)
 
+<<<<<<< HEAD
 map + theme_map()</code></pre>
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?</p>
@@ -272,6 +334,29 @@ head(regiondata)</code></pre>
 
 barplot2 + theme_wsj() + coord_flip()</code></pre>
 <p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+=======
+map &lt;- map + theme_map()
+map</code></pre>
+<p><img src="post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png"></p>
+<p>Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?</p>
+<pre><code># Average by Region
+
+regiondata &lt;- sqldf(&quot;select distinct Division, sum(`2013Pop`) as Pop, sum(`2013RegisteredOwners`) as Owners  from Firearms_Data_KAD group by Division&quot;)
+head(regiondata)
+regiondata$Pct &lt;- regiondata$Owners/regiondata$Pop
+head(regiondata)
+
+regiondata$Division &lt;- factor(regiondata$Division, 
+                                      levels = regiondata$Division[order(regiondata$Pct)])
+print(regiondata)
+
+
+barplot2 &lt;- qplot(Division, data=regiondata, geom=&quot;bar&quot;,
+                  weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;)
+barplot2 &lt;- barplot2 + theme_wsj() + coord_flip()
+barplot2</code></pre>
+<p><img src="post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png"></p>
+>>>>>>> parent of d737dd8... cleanup
 In summation, we find the following:
 <li>
 Wyoming has, by far, the highest percentage of residents who are registered gun owners
@@ -280,8 +365,12 @@ New York state has the lowest rate of gun ownership
 <li>
 In general, Western and Mountain states have the highest rate of registered gun ownership
 <li>
+<<<<<<< HEAD
 <p>However, don’t forget that the District of Columbia is #2 <br></p>
 <p>[THE END]</p>
+=======
+<p>However, don’t forget that the District of Columbia is #2</p>
+>>>>>>> parent of d737dd8... cleanup
 
 	</article>
 </main>

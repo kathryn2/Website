@@ -13,7 +13,7 @@ categories: []
 
 We will answer this question using R.  First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013).  This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.
 
-```{r}
+```
 # Set working directory
 setwd("~/Desktop")
 
@@ -21,13 +21,17 @@ setwd("~/Desktop")
 library(readxl)
 Firearms_Data_KAD <- read_excel("~/Desktop/R/Per Capita Firearms Registered/Firearms_Data_KAD.xlsx")
 
-head(Firearms_Data_KAD)
+View(Firearms_Data_KAD)
 ```
+<<<<<<< HEAD
+=======
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Firearms_Data_KAD.png">
+>>>>>>> parent of d737dd8... cleanup
 
 
 Next, let's load all of the packages we'll use for data transformations and visualizations.
 
-```{r}
+```
 # Load needed packages
 library(ggplot2)
 library(RColorBrewer)
@@ -40,8 +44,7 @@ library(choroplethr)
 ```
 
 Let's do some basic analysis and create a preliminary boxplot.
-
-```{r}
+```
 # Add percentage value
 Firearms_Data_KAD$Pct <- Firearms_Data_KAD$`2013RegisteredOwners`/Firearms_Data_KAD$`2013Pop`
 
@@ -55,11 +58,11 @@ boxplot <- bwplot(Pct ~ Division, data=Firearms_Data_KAD,
                   main="How Heavily Armed is Your Division? (2013)")
 boxplot
 ```
-
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Rplot.png">
 
 Next, let's use ggplot2 and a Wall Street Journal Theme to make this easier on the eyes.
 
-```{r}
+```
 # Box and whisker plot using ggplot2
 boxplot2 <- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
@@ -69,10 +72,11 @@ boxplot2 <- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
 boxplot2 + coord_flip() + theme_wsj()
 ```
 
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png">"
 
 Now let's step back a level of detail and see if there are similarities in Census Regions.
 
-```{r}
+```
 boxplot3 <- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
   xlab("US Census Regions") + 
@@ -81,10 +85,11 @@ boxplot3 <- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
 boxplot3 + coord_flip() + theme_wsj()
 ```
 
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png">"
 
 Next, let's dive into state-level detail to see the outliers.
 
-```{r}
+```
 # Bar plot by state
 
 # Order states
@@ -101,11 +106,11 @@ barplot <- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
 barplot + theme_wsj() + coord_flip()
 ```
 
-
+<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png">
 
 What does this look like on a map?  Do we see any regional trends?
 
-```{r}
+```
 Firearms_Data_KAD$region <- Firearms_Data_KAD$StateLower
   
 Firearms_Data_KAD$value <- Firearms_Data_KAD$Pct
@@ -121,11 +126,11 @@ map + theme_map()
 
 ```
 
-
+<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png">
 
 Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?
 
-```{r}
+```
 # Average by Region
 
 regiondata <- sqldf("select distinct Division, sum(`2013Pop`) as Pop, sum(`2013RegisteredOwners`) as Owners  from Firearms_Data_KAD group by Division")
@@ -140,15 +145,23 @@ head(regiondata)
 barplot2 <- qplot(Division, data=regiondata, geom="bar",
                   weight=Pct, ylab="PerCapita Registered Gun Owners")
 
+<<<<<<< HEAD
 barplot2 + theme_wsj() + coord_flip()
 ```
 
+=======
+<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png">
+>>>>>>> parent of d737dd8... cleanup
 
 In summation, we find the following:
 <li>Wyoming has, by far, the highest percentage of residents who are registered gun owners
 <li>New York state has the lowest rate of gun ownership
 <li>In general, Western and Mountain states have the highest rate of registered gun ownership
 <li>However, don't forget that the District of Columbia is #2
+<<<<<<< HEAD
 <br>
 
 [THE END]
+=======
+
+>>>>>>> parent of d737dd8... cleanup
