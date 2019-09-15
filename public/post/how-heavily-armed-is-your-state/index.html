@@ -20,12 +20,12 @@
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
     
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     
-    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
     
     
-    <link rel="icon" href="/coffee_to_go_icon_124542.ico" />
+    <link rel="icon" href="../../coffee_to_go_icon_124542.ico" />
     
 
     
@@ -43,14 +43,14 @@
 				<span class="icon-bar"></span>
 			</button>
 			
-				<a class="navbar-brand" href="/">Kathryn A Daugherty</a>
+				<a class="navbar-brand" href="../../">Kathryn A Daugherty</a>
 			
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				
 				
-					<li><a href="/about">About</a></li>
+					<li><a href="../../about">About</a></li>
 				
 			</ul>
 		</div>
@@ -61,7 +61,7 @@
 		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
 	<div id="menu-content" class="vertical-align">
 		
-			<h1 class="text-center"><a href="/">Kathryn A Daugherty</a></h1>
+			<h1 class="text-center"><a href="../../">Kathryn A Daugherty</a></h1>
 		
 		
 		
@@ -81,13 +81,15 @@
 			
 				<a href="https://github.com/kathryn2"><i class="fa fa-github fa-2x"></i></a>
 			
+				<a href="https://my.playstation.com/profile/Kathryn_D"><i class="fa fa-gamepad fa-2x"></i></a>
+			
 
 			<a href="mailto:kadplaystennis@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
 		</div>
 		<div id="links" class="text-center">
 			
 			
-				<a href="/about">About</a>
+				<a href="../../about">About</a>
 			
 		</div>
 	</div>
@@ -169,7 +171,7 @@ boxplot &lt;- bwplot(Pct ~ Division, data=Firearms_Data_KAD,
                   ylab=&quot;PerCapita Registered Gun Owners&quot;,
                   main=&quot;How Heavily Armed is Your Division? (2013)&quot;)
 boxplot</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Next, let’s use ggplot2 and a Wall Street Journal Theme to make this easier on the eyes.</p>
 <pre class="r"><code># Box and whisker plot using ggplot2
 boxplot2 &lt;- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
@@ -177,18 +179,18 @@ boxplot2 &lt;- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   xlab(&quot;US Census Regional Divisions&quot;) + 
   labs(title=&quot;Division Owners&quot;)
 boxplot2</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>boxplot2 + coord_flip() + theme_wsj()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <p>Now let’s step back a level of detail and see if there are similarities in Census Regions.</p>
 <pre class="r"><code>boxplot3 &lt;- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
   xlab(&quot;US Census Regions&quot;) + 
   labs(title=&quot;Regions&quot;)
 boxplot3</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>boxplot3 + coord_flip() + theme_wsj()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>Next, let’s dive into state-level detail to see the outliers.</p>
 <pre class="r"><code># Bar plot by state
 
@@ -220,9 +222,9 @@ barplot &lt;- qplot(StateName, data=Firearms_Data_KAD, geom=&quot;bar&quot;,
             weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;) 
 barplot &lt;- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
 barplot</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>barplot + theme_wsj() + coord_flip()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <p>What does this look like on a map? Do we see any regional trends?</p>
 <pre class="r"><code>Firearms_Data_KAD$region &lt;- Firearms_Data_KAD$StateLower
   
@@ -237,7 +239,7 @@ map &lt;- state_choropleth(
 
 map &lt;- map + theme_map()
 map</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?</p>
 <pre class="r"><code># Average by Region
 
@@ -276,7 +278,7 @@ print(regiondata)</code></pre>
                   weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;)
 barplot2 &lt;- barplot2 + theme_wsj() + coord_flip()
 barplot2</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="../../post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 In summation, we find the following:
 <li>
 Wyoming has, by far, the highest percentage of residents who are registered gun owners

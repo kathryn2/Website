@@ -1,6 +1,6 @@
 baseurl = ""
 theme = "hugo-geo"
-relativeURLs = false
+relativeURLs = true
 languageCode = "en-us"
 title = "Hello World!"
 disqusShortname = ""
@@ -41,6 +41,10 @@ paginate = 5
 	[[params.socialbuttons]]
 	faicon = "github"
 	url = "https://github.com/kathryn2"
+	[[params.socialbuttons]]
+	faicon = "gamepad"
+	url = "https://my.playstation.com/profile/Kathryn_D"
+	
 
 
 	[[params.navlinks]]

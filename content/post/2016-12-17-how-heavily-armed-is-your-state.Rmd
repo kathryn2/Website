@@ -25,8 +25,6 @@ head(Firearms_Data_KAD)
 ```
 
 
-
-
 Next, let's load all of the packages we'll use for data transformations and visualizations.
 
 ```{r}
@@ -67,7 +65,6 @@ boxplot2 <- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
   xlab("US Census Regional Divisions") + 
   labs(title="Division Owners")
-boxplot2
 
 boxplot2 + coord_flip() + theme_wsj()
 ```
@@ -80,7 +77,6 @@ boxplot3 <- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
   xlab("US Census Regions") + 
   labs(title="Regions")
-boxplot3
 
 boxplot3 + coord_flip() + theme_wsj()
 ```
@@ -101,7 +97,6 @@ Firearms_Data_KAD$StateName
 barplot <- qplot(StateName, data=Firearms_Data_KAD, geom="bar",
             weight=Pct, ylab="PerCapita Registered Gun Owners") 
 barplot <- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
-barplot
 
 barplot + theme_wsj() + coord_flip()
 ```
@@ -122,8 +117,8 @@ map <- state_choropleth(
       num_colors = 1,
       zoom = NULL)
 
-map <- map + theme_map()
-map
+map + theme_map()
+
 ```
 
 
@@ -140,15 +135,13 @@ head(regiondata)
 
 regiondata$Division <- factor(regiondata$Division, 
                                       levels = regiondata$Division[order(regiondata$Pct)])
-print(regiondata)
-
+head(regiondata)
 
 barplot2 <- qplot(Division, data=regiondata, geom="bar",
                   weight=Pct, ylab="PerCapita Registered Gun Owners")
-barplot2 <- barplot2 + theme_wsj() + coord_flip()
-barplot2
-```
 
+barplot2 + theme_wsj() + coord_flip()
+```
 
 
 In summation, we find the following:
@@ -156,6 +149,6 @@ In summation, we find the following:
 <li>New York state has the lowest rate of gun ownership
 <li>In general, Western and Mountain states have the highest rate of registered gun ownership
 <li>However, don't forget that the District of Columbia is #2
-
+<br>
 
 [THE END]
