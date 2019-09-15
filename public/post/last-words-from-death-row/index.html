@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Last Words from Death Row">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2017-11-25">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/last-words-from-death-row/">
+    <meta property="og:site_name" content="Hello World!">
+    
+    <meta name="generator" content="Hugo 0.58.2" />
+    <title>Last Words from Death Row &middot; Hello World!</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
+    
+    
+    <link rel="icon" href="../../coffee_to_go_icon_124542.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Kathryn A Daugherty</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Kathryn A Daugherty</a></h1>
+		
+		
+		
+		
+		
+			<img id="profile-pic" src="//img/kathryn_img.jpg" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://www.linkedin.com/in/kathryn22/"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://www.instagram.com/kathryn2ann/"><i class="fa fa-instagram fa-2x"></i></a>
+			
+				<a href="https://www.facebook.com/kathryn22ann"><i class="fa fa-facebook fa-2x"></i></a>
+			
+				<a href="https://public.tableau.com/profile/kathryn.khaki.daugherty"><i class="fa fa-laptop fa-2x"></i></a>
+			
+				<a href="https://github.com/kathryn2"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://my.playstation.com/profile/Kathryn_D"><i class="fa fa-gamepad fa-2x"></i></a>
+			
+
+			<a href="mailto:kadplaystennis@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Last Words from Death Row</h1>
+	</header>
+
+	<article>
+		<p>A Kaggle data source <a href="https://www.kaggle.com/ianmobbs/texas-death-row-executions-info-and-last-words">here</a> provides the public with information on Texas death row inmates from 1982 to 2017.  It includes name, age, race, county, date, and last words from each person.  We will analyze this using R to conduct text analysis.</p>
+
+<p>Let&rsquo;s load up tidytext to get started and then pull in the text data file.</p>
+
+<pre><code># Set up tidytext
+require(tidytext)
+
+# Set working directory
+setwd(&quot;~/Desktop/R/TX_Executions/text/&quot;)
+
+# Load dataset
+offenders &lt;- read.table(&quot;Last_Statement.txt&quot;)
+# offenders &lt;- readLines(file.choose())
+head(offenders)
+</code></pre>
+
+<p><img src = "/post/2017-11-25-last-words-from-death-row_files/offenders.png"></p>
+
+<p>Next, we&rsquo;re going to load additional libraries and convert the text document into a text corpus.</p>
+
+<pre><code># Load other packages
+require(dplyr)
+require(ggplot2)
+require(wordcloud)
+require(stringr)
+require(tm)
+require(SnowballC)
+require(RColorBrewer)
+
+# Convert text to corpus
+lastWords &lt;- Corpus(VectorSource(offenders))
+</code></pre>
+
+<p>Text analysis often requires a fair amount of processing.  We&rsquo;ll do that here.</p>
+
+<pre><code># Clean up text
+toSpace &lt;- content_transformer(function (x , pattern ) gsub(pattern, &quot; &quot;, x))
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;/&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;@&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;\\|&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;\x89&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;xdb&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;xcf&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;xe5&quot;)
+lastWords &lt;- tm_map(lastWords, toSpace, &quot;xca&quot;)
+
+# Convert the text to lower case
+lastWords &lt;- tm_map(lastWords, content_transformer(tolower))
+
+# Remove numbers
+lastWords &lt;- tm_map(lastWords, removeNumbers)
+
+# Remove english common stopwords
+lastWords &lt;- tm_map(lastWords, removeWords, stopwords(&quot;english&quot;))
+
+# Remove punctuations
+lastWords &lt;- tm_map(lastWords, removePunctuation)
+
+# Eliminate extra white spaces
+lastWords &lt;- tm_map(lastWords, stripWhitespace)
+</code></pre>
+
+<p>With the cleaned-up text, we&rsquo;ll want to create a term document matrix (TDM).</p>
+
+<pre><code># Construct term document matrix
+dtm &lt;- TermDocumentMatrix(lastWords)
+m &lt;- as.matrix(dtm)
+v &lt;- sort(rowSums(m),decreasing=TRUE)
+d &lt;- data.frame(word = names(v),freq=v)
+head(d, 10)
+</code></pre>
+
+<p><img src="../../post/2017-11-25-last-words-from-death-row_files/tdm.png"></p>
+
+<p>Now, we&rsquo;re in a spot where we can start to analyze the data-set.  We&rsquo;re going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).</p>
+
+<pre><code># Create word cloud
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 20,
+          max.words=75, random.order=FALSE, rot.per=0.00, 
+          colors=brewer.pal(4, &quot;RdGy&quot;))
+</code></pre>
+
+<p><img src="../../post/2017-11-25-last-words-from-death-row_files/word_cloud.png"></p>
+
+<p>We see that love stands out.  There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).</p>
+
+<p>To simplify this further, we can construct a bar chart that shows the top ten words used.</p>
+
+<pre><code># Plot word frequencies
+# Bar chart
+barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
+        col =&quot;grey&quot;, main =&quot;Most Spoken Last Words&quot;,
+        ylab = &quot;Frequency&quot;)
+</code></pre>
+
+<p><img src="../../post/2017-11-25-last-words-from-death-row_files/barchart.png"></p>
+
+<p>This shows the same information as the word cloud, but defines the rank and order with more detail.</p>
+
+<p>[THE END]</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>
