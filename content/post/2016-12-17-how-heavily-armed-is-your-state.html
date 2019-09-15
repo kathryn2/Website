@@ -83,19 +83,17 @@ boxplot2 &lt;- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
   xlab(&quot;US Census Regional Divisions&quot;) + 
   labs(title=&quot;Division Owners&quot;)
-boxplot2</code></pre>
+
+boxplot2 + coord_flip() + theme_wsj()</code></pre>
 <p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>boxplot2 + coord_flip() + theme_wsj()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <p>Now let’s step back a level of detail and see if there are similarities in Census Regions.</p>
 <pre class="r"><code>boxplot3 &lt;- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab(&quot;PerCapita Registered Gun Owners&quot;) +
   xlab(&quot;US Census Regions&quot;) + 
   labs(title=&quot;Regions&quot;)
-boxplot3</code></pre>
+
+boxplot3 + coord_flip() + theme_wsj()</code></pre>
 <p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>boxplot3 + coord_flip() + theme_wsj()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>Next, let’s dive into state-level detail to see the outliers.</p>
 <pre class="r"><code># Bar plot by state
 
@@ -126,10 +124,9 @@ Firearms_Data_KAD$StateName</code></pre>
 barplot &lt;- qplot(StateName, data=Firearms_Data_KAD, geom=&quot;bar&quot;,
             weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;) 
 barplot &lt;- barplot + theme(axis.text.x = element_text(angle=90, hjust=1))
-barplot</code></pre>
+
+barplot + theme_wsj() + coord_flip()</code></pre>
 <p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code>barplot + theme_wsj() + coord_flip()</code></pre>
-<p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <p>What does this look like on a map? Do we see any regional trends?</p>
 <pre class="r"><code>Firearms_Data_KAD$region &lt;- Firearms_Data_KAD$StateLower
   
@@ -142,8 +139,7 @@ map &lt;- state_choropleth(
       num_colors = 1,
       zoom = NULL)
 
-map &lt;- map + theme_map()
-map</code></pre>
+map + theme_map()</code></pre>
 <p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?</p>
 <pre class="r"><code># Average by Region
@@ -168,21 +164,18 @@ head(regiondata)</code></pre>
 ## 6            Pacific 51373178 415969 0.008097007</code></pre>
 <pre class="r"><code>regiondata$Division &lt;- factor(regiondata$Division, 
                                       levels = regiondata$Division[order(regiondata$Pct)])
-print(regiondata)</code></pre>
+head(regiondata)</code></pre>
 <pre><code>##             Division      Pop Owners         Pct
 ## 1 East North Central 46662180 430545 0.009226851
 ## 2 East South Central 18716202 249693 0.013341008
 ## 3    Middle Atlantic 34469280 204755 0.005940217
 ## 4           Mountain 22881245 466634 0.020393733
 ## 5        New England 14618806 112220 0.007676414
-## 6            Pacific 51373178 415969 0.008097007
-## 7     South Atlantic 61783647 911818 0.014758242
-## 8 West North Central 20885710 184428 0.008830344
-## 9 West South Central 37883604 577526 0.015244748</code></pre>
+## 6            Pacific 51373178 415969 0.008097007</code></pre>
 <pre class="r"><code>barplot2 &lt;- qplot(Division, data=regiondata, geom=&quot;bar&quot;,
                   weight=Pct, ylab=&quot;PerCapita Registered Gun Owners&quot;)
-barplot2 &lt;- barplot2 + theme_wsj() + coord_flip()
-barplot2</code></pre>
+
+barplot2 + theme_wsj() + coord_flip()</code></pre>
 <p><img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 In summation, we find the following:
 <li>
@@ -192,5 +185,5 @@ New York state has the lowest rate of gun ownership
 <li>
 In general, Western and Mountain states have the highest rate of registered gun ownership
 <li>
-<p>However, don’t forget that the District of Columbia is #2</p>
+<p>However, don’t forget that the District of Columbia is #2 <br></p>
 <p>[THE END]</p>

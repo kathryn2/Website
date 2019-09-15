@@ -17,7 +17,18 @@
       <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/last-words-from-death-row/</guid>
-      <description></description>
+      <description>From Kaggle, we get a data set including last words from Texas death row inmates. It has names, ages, race, county, date and statements for each person spanning from 1982 to 2017. We&amp;rsquo;re going to use R to identify common words/themes.
+# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset # offenders &amp;lt;- read.table(&amp;quot;Last_Statement.txt&amp;quot;) offenders &amp;lt;- readLines(file.choose()) head(offenders)  Let&amp;rsquo;s load required R packages and make a text corpus.</description>
+    </item>
+    
+    <item>
+      <title>Last Words from Death Row</title>
+      <link>/post/last-words-from-death-row/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/last-words-from-death-row/</guid>
+      <description>From Kaggle, we get a data set including last words from Texas death row inmates. It has names, ages, race, county, date and statements for each person spanning from 1982 to 2017. We&amp;rsquo;re going to use R to identify common words/themes.
+# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset # offenders &amp;lt;- read.table(&amp;quot;Last_Statement.txt&amp;quot;) offenders &amp;lt;- readLines(file.choose()) head(offenders)  Let&amp;rsquo;s load required R packages and make a text corpus.</description>
     </item>
     
     <item>

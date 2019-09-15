@@ -1,4 +1,4 @@
-baseurl = ""
+baseurl = "https://k22daugherty.netlify.com/"
 theme = "hugo-geo"
 relativeURLs = true
 languageCode = "en-us"
@@ -6,9 +6,9 @@ title = "Hello World!"
 disqusShortname = ""
 paginate = 5
 
-[taxonomies]
-	tag = "tags"
-	tutorial = "tutorials"
+#[taxonomies]
+#	tag = "tags"
+#	tutorial = "tutorials"
 
 [params]
 	showglobe = true
