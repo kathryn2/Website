@@ -1,26 +1,14 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-baseurl = "https://k22daugherty.netlify.com/"
-=======
-baseurl = "https://k22daugherty.netlify.com"
->>>>>>> parent of be6265f... tweaks
+baseurl = ""
 theme = "hugo-geo"
-relativeURLs = true
+relativeURLs = false
 languageCode = "en-us"
-title = "Kathryn's Site"
+title = "Hello World!"
 disqusShortname = ""
-=======
-theme = "hugo-geo"
-relativeURLs = true
-languageCode = "en-us"
-title = "Kathryn's Site"
-disqusShortname = "shortcode-here"
->>>>>>> parent of 53a9289... restore
 paginate = 5
 
-#[taxonomies]
-#	tag = "tags"
-#	tutorial = "tutorials"
+[taxonomies]
+	tag = "tags"
+	tutorial = "tutorials"
 
 [params]
 	showglobe = true
@@ -53,10 +41,6 @@ paginate = 5
 	[[params.socialbuttons]]
 	faicon = "github"
 	url = "https://github.com/kathryn2"
-	[[params.socialbuttons]]
-	faicon = "gamepad"
-	url = "https://my.playstation.com/profile/Kathryn_D"
-	
 
 
 	[[params.navlinks]]
