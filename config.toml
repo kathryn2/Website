@@ -1,0 +1,65 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+baseurl = "https://k22daugherty.netlify.com/"
+=======
+baseurl = "https://k22daugherty.netlify.com"
+>>>>>>> parent of be6265f... tweaks
+theme = "hugo-geo"
+relativeURLs = true
+languageCode = "en-us"
+title = "Kathryn's Site"
+disqusShortname = ""
+=======
+theme = "hugo-geo"
+relativeURLs = true
+languageCode = "en-us"
+title = "Kathryn's Site"
+disqusShortname = "shortcode-here"
+>>>>>>> parent of 53a9289... restore
+paginate = 5
+
+#[taxonomies]
+#	tag = "tags"
+#	tutorial = "tutorials"
+
+[params]
+	showglobe = true
+
+	favicon = "coffee_to_go_icon_124542.ico"
+	
+	analytics = "code-here"
+
+	email = "kadplaystennis@gmail.com"
+
+	profilepic = "img/kathryn_img.jpg"
+	
+	title = "Kathryn A Daugherty"
+	#subtitle = "MY BLOG"
+
+	# Social buttons for sidebar
+	# Each of these are optional
+	[[params.socialbuttons]]
+	faicon = "linkedin"
+	url = "https://www.linkedin.com/in/kathryn22/"
+	[[params.socialbuttons]]
+	faicon = "instagram"
+	url = "https://www.instagram.com/kathryn2ann/"
+	[[params.socialbuttons]]
+	faicon = "facebook"
+	url = "https://www.facebook.com/kathryn22ann"
+	[[params.socialbuttons]]
+	faicon = "laptop"
+	url = "https://public.tableau.com/profile/kathryn.khaki.daugherty"
+	[[params.socialbuttons]]
+	faicon = "github"
+	url = "https://github.com/kathryn2"
+	[[params.socialbuttons]]
+	faicon = "gamepad"
+	url = "https://my.playstation.com/profile/Kathryn_D"
+	
+
+
+	[[params.navlinks]]
+	name = "About"
+	url = "about"
+	

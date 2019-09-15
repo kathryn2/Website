@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hello World!</title>
+    <link>/</link>
+    <description>Recent content on Hello World!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/</link>
+      <pubDate>Sat, 14 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Kathryn Daugherty is analytics professional who specializes in price optimization. She received her MS in predictive analytics from Northwestern University, her MBA with specializations in finance and management from Rollins College and a BA in economics from the University of Colorado at Boulder.
+Daugherty is certified in project management (PMP), lean six sigma and restaurant revenue management (Cornell). Hobbies include travel (especially new destinations), technology, video games, sports (football and tennis), and spending time with her wife and dog.</description>
+    </item>
+    
+    <item>
+      <title>Last Words from Death Row</title>
+      <link>/post/last-words-from-death-row/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/last-words-from-death-row/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How Heavily Armed Is Your State?</title>
+      <link>/post/how-heavily-armed-is-your-state/</link>
+      <pubDate>Sat, 17 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/how-heavily-armed-is-your-state/</guid>
+      <description>We will answer this question using R. First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013). This data comes to us from CBS News.
+# Set working directory setwd(&amp;quot;~/Desktop&amp;quot;) # Load dataset library(readxl) Firearms_Data_KAD &amp;lt;- read_excel(&amp;quot;~/Desktop/R/Per Capita Firearms Registered/Firearms_Data_KAD.xlsx&amp;quot;) View(Firearms_Data_KAD) Next, let’s load all of the packages we’ll use for data transformations and visualizations.</description>
+    </item>
+    
+    <item>
+      <title>Compiling Custom CSS</title>
+      <link>/tutorial/custom-css/</link>
+      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/custom-css/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet molestie mauris nec tempor. Sed non lacus massa. Aliquam ut convallis velit. Etiam dictum mollis mi, a vestibulum ex suscipit ut. Proin viverra lacinia urna at interdum. Sed eu quam sit amet metus fermentum pharetra id a sem. Pellentesque lorem dolor, venenatis sed felis non, fringilla ornare felis. Donec nisi lorem, dignissim id interdum vel, cursus malesuada quam. Integer tempus consectetur tellus, nec sagittis est mattis vel.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started With hugo-geo</title>
+      <link>/tutorial/getting-started/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/getting-started/</guid>
+      <description>&lt;p&gt;Setting up and configuring hugo-geo is as simple as changing a few values in your site &lt;code&gt;config.toml&lt;/code&gt;. Lets look at this example site&amp;rsquo;s config and go over what
+each of hugo-geo&amp;rsquo;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt;
+
+&lt;p&gt;If this guide doesn&amp;rsquo;t answer your question it may be covered in the &lt;a href=&#34;http://gohugo.io/overview/configuration/&#34;&gt;Hugo documentation&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>About Me       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
+    </item>
+    
+  </channel>
+</rss>
