@@ -11,7 +11,7 @@ tags: []
 categories: []
 ---
 
-First load the dataset, which contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013).  This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.
+We will answer this question using R.  First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013).  This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.
 
 ```
 # Set working directory

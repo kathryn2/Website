@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/how-heavily-armed-is-your-state/</loc>
-    <lastmod>2016-12-17T00:00:00+00:00</lastmod>
+    <loc>/about/</loc>
+    <lastmod>2019-09-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2016-12-17T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/last-words-from-death-row/</loc>
+    <lastmod>2017-11-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2017-11-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/how-heavily-armed-is-your-state/</loc>
     <lastmod>2016-12-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -54,17 +64,7 @@
   
   <url>
     <loc>/about/</loc>
-    <lastmod>2015-07-28T09:51:51-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/blog/</loc>
-    <lastmod>2015-07-28T09:32:45-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/welcome/</loc>
-    <lastmod>2015-07-28T09:32:45-04:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
