@@ -13,7 +13,7 @@ categories: []
 
 We will answer this question using R.  First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013).  This data comes to us from <a href="http://www.cbsnews.com/pictures/most-heavily-armed-states-in-america/">CBS News</a>.
 
-```r
+```{r}
 # Set working directory
 setwd("~/Desktop")
 
@@ -23,12 +23,14 @@ Firearms_Data_KAD <- read_excel("~/Desktop/R/Per Capita Firearms Registered/Fire
 
 View(Firearms_Data_KAD)
 ```
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Firearms_Data_KAD.png">
+
+
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/Firearms_Data_KAD.png)
 
 
 Next, let's load all of the packages we'll use for data transformations and visualizations.
 
-```r
+```{r}
 # Load needed packages
 library(ggplot2)
 library(RColorBrewer)
@@ -42,7 +44,7 @@ library(choroplethr)
 
 Let's do some basic analysis and create a preliminary boxplot.
 
-```r
+```{r}
 # Add percentage value
 Firearms_Data_KAD$Pct <- Firearms_Data_KAD$`2013RegisteredOwners`/Firearms_Data_KAD$`2013Pop`
 
@@ -57,11 +59,11 @@ boxplot <- bwplot(Pct ~ Division, data=Firearms_Data_KAD,
 boxplot
 ```
 
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Rplot.png">
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/Rplot.png)
 
 Next, let's use ggplot2 and a Wall Street Journal Theme to make this easier on the eyes.
 
-```r
+```{r}
 # Box and whisker plot using ggplot2
 boxplot2 <- ggplot(Firearms_Data_KAD, aes(Division, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
@@ -72,11 +74,11 @@ boxplot2
 boxplot2 + coord_flip() + theme_wsj()
 ```
 
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png">"
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/WSJ.png)
 
 Now let's step back a level of detail and see if there are similarities in Census Regions.
 
-```r
+```{r}
 boxplot3 <- ggplot(Firearms_Data_KAD, aes(CensusRegion, Pct)) +
   geom_boxplot() + ylab("PerCapita Registered Gun Owners") +
   xlab("US Census Regions") + 
@@ -86,11 +88,11 @@ boxplot3
 boxplot3 + coord_flip() + theme_wsj()
 ```
 
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png">"
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/Regions.png)
 
 Next, let's dive into state-level detail to see the outliers.
 
-```r
+```{r}
 # Bar plot by state
 
 # Order states
@@ -108,11 +110,11 @@ barplot
 barplot + theme_wsj() + coord_flip()
 ```
 
-<img src="/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png">
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/state_bars.png)
 
 What does this look like on a map?  Do we see any regional trends?
 
-```r
+```{r}
 Firearms_Data_KAD$region <- Firearms_Data_KAD$StateLower
   
 Firearms_Data_KAD$value <- Firearms_Data_KAD$Pct
@@ -128,11 +130,11 @@ map <- map + theme_map()
 map
 ```
 
-<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png">
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/map1.png)
 
 Rather than looking at distributions or state-specific data, what is the average gun ownership rate for each region?
 
-```r
+```{r}
 # Average by Region
 
 regiondata <- sqldf("select distinct Division, sum(`2013Pop`) as Pop, sum(`2013RegisteredOwners`) as Owners  from Firearms_Data_KAD group by Division")
@@ -151,7 +153,7 @@ barplot2 <- barplot2 + theme_wsj() + coord_flip()
 barplot2
 ```
 
-<img src="post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png">
+![](/post/2016-12-17-how-heavily-armed-is-your-state_files/regional.png)
 
 In summation, we find the following:
 <li>Wyoming has, by far, the highest percentage of residents who are registered gun owners
