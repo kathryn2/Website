@@ -102,7 +102,7 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 20,
 
 We see that love stands out.  There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).
 
-To simplify this further, we can construct a bar chart that shows the top ten words used.
+To simplify this further, we can construct a bar chart that shows the top fifteen words used.
 
 ```
 # Plot word frequencies

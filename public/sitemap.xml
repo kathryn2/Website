@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-11-25T00:00:00+00:00</lastmod>
+    <loc>/post/comparing-skills-across-occupations/</loc>
+    <lastmod>2018-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/last-words-from-death-row/</loc>
-    <lastmod>2017-11-25T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2018-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2018-08-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/last-words-from-death-row/</loc>
     <lastmod>2017-11-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -60,11 +65,6 @@
   <url>
     <loc>/post/analyzing-football-data-in-r/</loc>
     <lastmod>2015-08-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/alcoholic-beverage-consumption-by-state/</loc>
-    <lastmod>2014-02-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -80,7 +80,7 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 20,
           colors=brewer.pal(4, &quot;RdGy&quot;))</code></pre>
 <p><img src="/post/2017-11-25-last-words-from-death-row_files/word_cloud.png"></p>
 <p>We see that love stands out. There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).</p>
-<p>To simplify this further, we can construct a bar chart that shows the top ten words used.</p>
+<p>To simplify this further, we can construct a bar chart that shows the top fifteen words used.</p>
 <pre><code># Plot word frequencies
 # Bar chart
 barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,

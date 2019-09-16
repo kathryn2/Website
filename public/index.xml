@@ -6,10 +6,20 @@
     <description>Recent content on Hello World!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Comparing Skills Across Occupations</title>
+      <link>/post/comparing-skills-across-occupations/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/comparing-skills-across-occupations/</guid>
+      <description>My sister is a Pharmacist. My wife is an Environmental Scientists / Project Manager. They’re both interested in Public Health, though they work in very different environments. Then there’s me: which box do you check for Revenue Management Analyst? Or Data Scientist?
+To try and define my role, I compared three defined options: Financial Analysts, Business Intelligence Analysts and Industrial Engineers. I felt these might be most representative of what I do.</description>
+    </item>
     
     <item>
       <title>Last Words from Death Row</title>
@@ -62,15 +72,6 @@ each of hugo-geo&amp;rsquo;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt
       <description>This analysis uses 3 datasets. The first has information from the NFL draft, the second has information on NFL team statistics, and the third includes information from the Deflategate scandal involving the New England Patriots.
 Let’s load the needed data and R packages.
 # Install needed packages library(ggplot2) library(vcd) library(stats) library(car) # Load data that will be used for this analysis # Rename Football Stats dataset (with drank rankings) footballstats.</description>
-    </item>
-    
-    <item>
-      <title>Alcoholic Beverage Consumption by State</title>
-      <link>/post/alcoholic-beverage-consumption-by-state/</link>
-      <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/alcoholic-beverage-consumption-by-state/</guid>
-      <description></description>
     </item>
     
     <item>
