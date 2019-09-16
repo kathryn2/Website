@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Starbucks iOs App Analysis">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-09-16">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/starbucks-ios-app-analysis/">
+    <meta property="og:site_name" content="Hello World!">
+    
+    <meta name="generator" content="Hugo 0.58.2" />
+    <title>Starbucks iOs App Analysis &middot; Hello World!</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
+    
+    
+    <link rel="icon" href="../../coffee_to_go_icon_124542.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Kathryn A Daugherty</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Kathryn A Daugherty</a></h1>
+		
+		
+		
+		
+		
+			<img id="profile-pic" src="//img/kathryn_img.jpg" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://www.linkedin.com/in/kathryn22/"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://www.instagram.com/kathryn2ann/"><i class="fa fa-instagram fa-2x"></i></a>
+			
+				<a href="https://www.facebook.com/kathryn22ann"><i class="fa fa-facebook fa-2x"></i></a>
+			
+				<a href="https://public.tableau.com/profile/kathryn.khaki.daugherty"><i class="fa fa-laptop fa-2x"></i></a>
+			
+				<a href="https://github.com/kathryn2"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://my.playstation.com/profile/Kathryn_D"><i class="fa fa-gamepad fa-2x"></i></a>
+			
+
+			<a href="mailto:kadplaystennis@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Starbucks iOs App Analysis</h1>
+	</header>
+
+	<article>
+		
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="../../rmarkdown-libs/proj4js/proj4.js"></script>
+<link href="../../rmarkdown-libs/highcharts/css/motion.css" rel="stylesheet" />
+<link href="../../rmarkdown-libs/highcharts/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/highcharts/highcharts.js"></script>
+<script src="../../rmarkdown-libs/highcharts/highcharts-3d.js"></script>
+<script src="../../rmarkdown-libs/highcharts/highcharts-more.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/stock.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/map.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/annotations.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/boost.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/data.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/drag-panes.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/drilldown.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/item-series.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/offline-exporting.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/overlapping-datalabels.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/exporting.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/export-data.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/funnel.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/heatmap.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/treemap.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/sankey.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/solid-gauge.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/streamgraph.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/sunburst.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/vector.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/wordcloud.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/xrange.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/tilemap.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/venn.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/gantt.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/timeline.js"></script>
+<script src="../../rmarkdown-libs/highcharts/modules/parallel-coordinates.js"></script>
+<script src="../../rmarkdown-libs/highcharts/plugins/grouped-categories.js"></script>
+<script src="../../rmarkdown-libs/highcharts/plugins/motion.js"></script>
+<script src="../../rmarkdown-libs/highcharts/plugins/multicolor_series.js"></script>
+<script src="../../rmarkdown-libs/highcharts/custom/reset.js"></script>
+<script src="../../rmarkdown-libs/highcharts/custom/symbols-extra.js"></script>
+<script src="../../rmarkdown-libs/highcharts/custom/text-symbols.js"></script>
+<script src="../../rmarkdown-libs/highchart-binding/highchart.js"></script>
+
+
+<p>Have you ever wanted to see more detail behind apps on your iOS device? There’s an R package called ‘itunesr’ that allows for free extracts of user ratings and reviews. Combining that with some sentiment analysis, you can examine any trends for apps of interest.</p>
+<p>First, you’ll need to identify an app of interest. I use the <br>Starbucks</br> app quite a bit and have read numerous articles about it’s success. So, let’s see if ‘itunesr’ tells a smiliar story.</p>
+<p>Let’s install the needed programs.</p>
+<pre class="r"><code># Set CRAN Mirror
+options(repos = c(CRAN = &quot;http://cran.rstudio.com&quot;))
+
+# Set time zone
+options(tz=&quot;America/New_York&quot;)
+
+# install itunesr directly from CRAN:
+install.packages(&quot;itunesr&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/Users/kathryn_daugherty/Library/R/3.5/library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## 
+## The downloaded binary packages are in
+##  /var/folders/gb/t5w_mwv15mv1rqgt0c4n0m500000gn/T//Rtmp0ZVLk9/downloaded_packages</code></pre>
+<pre class="r"><code># the development version from GitHub:
+# install.packages(&quot;devtools&quot;)
+# devtools::install_github(&quot;amrrs/itunesr&quot;)
+library(itunesr)</code></pre>
+<p>Now, let’s find the app’s ID. To do this, you must search for it in the apple online store and you’ll find the number in the URL. <a href="https://apps.apple.com/us/app/starbucks/id331177714">Here</a> is Starbucks’ page and you’ll note that its ID is 331177714.</p>
+<pre class="r"><code># Starbucks page:  https://apps.apple.com/us/app/starbucks/id331177714
+# Latest (Page 1) Starbucks Reviews for the Country: US
+sbux_reviews &lt;- getReviews(331177714,&#39;us&#39;,1)
+head(sbux_reviews,2)</code></pre>
+<pre><code>##                                 Title
+## 1                      Takes forever!
+## 2 Beautifully designed and functional
+##                                        Author_URL Author_Name App_Version
+## 1 https://itunes.apple.com/us/reviews/id489505113   Revelaine        5.10
+## 2 https://itunes.apple.com/us/reviews/id143796547      hbomb7        5.10
+##   Rating
+## 1      2
+## 2      5
+##                                                                                                                                                                                                                                                                                                                                                                                           Review
+## 1 The new Starbucks store in Kearny NJ us ridiculously slow. When I use the app, it has taken up to 50 minutes to get my order.  One time, I waited and asked them to verify that they had received my order. They said they had, then 10 minutes later, said they had run out of the product. It’s a new store and perhaps they are working thru some kinks but they need to resolve this soon.
+## 2                                                                        Love this app! It was beautifully designed (great UI/UX) and functions virtually flawlessly. Not a huge deal, but my only suggestion would be to be able to load an exiting gift card with another gift card’s balance, rather than having to create a new card, transfer the balance, then delete the card. Thank you.
+##                  Date
+## 1 2019-09-16 17:11:22
+## 2 2019-09-16 16:34:37</code></pre>
+<p>This is a lot of data! Let’s start off by looking at the numerical ratings/scores that users have given the app.</p>
+<pre class="r"><code># Ratings Trend
+install.packages(&quot;highcharter&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/Users/kathryn_daugherty/Library/R/3.5/library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## 
+## The downloaded binary packages are in
+##  /var/folders/gb/t5w_mwv15mv1rqgt0c4n0m500000gn/T//Rtmp0ZVLk9/downloaded_packages</code></pre>
+<pre class="r"><code># install.packages(&quot;lubridate&quot;)
+# install.packages(&quot;dplyr&quot;)
+library(highcharter)</code></pre>
+<pre><code>## Warning: package &#39;highcharter&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Highcharts (www.highcharts.com) is a Highsoft software product which is</code></pre>
+<pre><code>## not free for commercial and Governmental use</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<pre class="r"><code>dt &lt;- sbux_reviews
+dt$Date &lt;- as.Date(dt$Date)
+dt$Rating &lt;- as.numeric(dt$Rating)    
+dt &lt;- dt %&gt;% select(Date,Rating) %&gt;% group_by(Date) %&gt;% summarise(Rating = round(mean(Rating),2))
+highchart() %&gt;%   hc_add_series_times_values(dt$Date,dt$Rating, name = &#39;Average Rating&#39;)</code></pre>
+<pre><code>## Warning: &#39;hc_add_series_times_values&#39; is deprecated.
+## Use &#39;hc_add_series&#39; instead.
+## See help(&quot;Deprecated&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"hc_opts":{"title":{"text":null},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":{"type":"datetime"},"series":[{"marker":{"enabled":false},"data":[[1568419200000,3.5],[1568505600000,3.88],[1568592000000,4]],"name":"Average Rating"}]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>We see that the rating is generally pretty high. But, this doesn’t take advantage of all the text users have provided. To measure that, let’s use Bing’s defined sentiments to illustrate how postivie/negative the feedback is.</p>
+<pre class="r"><code># Sentiment Analysis 
+install.packages(&quot;sentimentr&quot;)</code></pre>
+<pre><code>## Installing package into &#39;/Users/kathryn_daugherty/Library/R/3.5/library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## 
+## The downloaded binary packages are in
+##  /var/folders/gb/t5w_mwv15mv1rqgt0c4n0m500000gn/T//Rtmp0ZVLk9/downloaded_packages</code></pre>
+<pre class="r"><code>library(sentimentr)</code></pre>
+<pre><code>## Warning: package &#39;sentimentr&#39; was built under R version 3.5.2</code></pre>
+<pre class="r"><code>library(tidytext)
+library(stringr)
+# identify and define sentiments/words
+get_sentiments(&quot;bing&quot;)</code></pre>
+<pre><code>## # A tibble: 6,788 x 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 2-faced     negative 
+##  2 2-faces     negative 
+##  3 a+          positive 
+##  4 abnormal    negative 
+##  5 abolish     negative 
+##  6 abominable  negative 
+##  7 abominably  negative 
+##  8 abominate   negative 
+##  9 abomination negative 
+## 10 abort       negative 
+## # ... with 6,778 more rows</code></pre>
+<p>Next, we’ll want to combine the sentiment scores with the words used in the reviews.</p>
+<pre class="r"><code># pull in sbux info
+reviews_only &lt;- as.character(sbux_reviews$Review)
+head(reviews_only)</code></pre>
+<pre><code>## [1] &quot;The new Starbucks store in Kearny NJ us ridiculously slow. When I use the app, it has taken up to 50 minutes to get my order.  One time, I waited and asked them to verify that they had received my order. They said they had, then 10 minutes later, said they had run out of the product. It’s a new store and perhaps they are working thru some kinks but they need to resolve this soon.&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## [2] &quot;Love this app! It was beautifully designed (great UI/UX) and functions virtually flawlessly. Not a huge deal, but my only suggestion would be to be able to load an exiting gift card with another gift card’s balance, rather than having to create a new card, transfer the balance, then delete the card. Thank you.&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## [3] &quot;Balances are rarely up to date \nRewards are not useful.  Constantly expire and the value and benefits change on a surprise basis. \n\nAdult supervision on the app development team would benefit us all&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+## [4] &quot;Love it&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## [5] &quot;Unlike other food and beverage apps (like Chick-fil-a) this app requires you to load funds - that you will not use entirely - to a Starbucks card in order to get rewards. It’s my money and I would like to pay from whatever card I choose. I would also like to add lower increments ($2,$3, $5 etc) rather than a minimum of $10. It’s inevitable to end up with a few dollars sitting on your card for Starbucks to utilize until your next visit which will likely cost most than the few bucks you have left, requiring yet another load. Starbucks absolutely has their own best interest at heart here.&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## [6] &quot;I use this app every single day, sometimes multiple times a day. It’s so convenient to be able to order exactly what we need instead of having to send my fumbling fiancé to the drive through to jumble the order and come back with all the wrong things. We have dairy allergies in the house, so one fumbled order equals someone going without their drink or breakfast. No bueno. Not to mention, being able to place your order, then either going through the drive through or running inside and wiggling through the crowd to grab your things and go - it’s likely one of the best ideas Starbucks has ever had. (Although I’m sure - and we’ve witnessed - the employees are cursing it some days when the mobile orders are coming in one after the other and the lines are out the door and/or around the corner!)\n\nI do have a couple of suggestions if Starbucks is open to hearing them. :)\n\n1. It’d be really nice if there was an option to select within each drink order for the strawless lids. (And/or things like the cardboard sleeves and drink stoppers.)\n\n2. Because we are a dairy sensitive family, a lot of the time I’ll order myself and my children fraps with almond milk (which is wonderful, thank you so much for the dairy free options!!). However, we *can* have a *small* amount of dairy, so the whipped cream is a treat, and totally okay as long as we order the drink itself nondairy. But - when we order via the app, the employees assume the whipped cream needs to be avoided as well, even though I do not specify it. So to avoid this what I’ve learned to do is to check “extra whipped cream” along with “almond milk” just so they know not to skip the whip. So my point is, it would be really nice if there was something to say yes, we want our frap with almond milk, but please don’t skip the delicious whip. :)\n\n3. I have celiac disease also, so I can’t have 96% of the amazing food Starbucks offers. I *love* the egg bites (and have gotten many friends hooked as well!) and your gluten free rice crispy bars.. but it sure would be nice if there were even just one more gluten free option on the menu. :) It would be so very deeply appreciated!\n\nThank you! Starbucks fan for life!&quot;</code></pre>
+<pre class="r"><code># plot findings
+sentiment_scores &lt;- reviews_only %&gt;% sentiment_by(by=NULL)
+highchart() %&gt;% hc_xAxis(sentiment_scores$element_id) %&gt;% hc_add_series(sentiment_scores$ave_sentiment, name = &#39;Reviews Sentiment Scores&#39;)</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"hc_opts":{"title":{"text":null},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"xAxis":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49]],"series":[{"data":[0.21443418035919,0.463539452416107,0.04512039695219,0.530330085889911,0.239090363281167,0.103095960626905,0.314853761847822,0.35068572627831,0.172621094982343,-0.0630104298856219,-0.483333333333333,0.433012701892219,0.138675049056307,0.487018260680343,1.78263684401705,0.474341649025257,0.493245957826718,0.33436167269599,0.459619407771256,0.0903536423452928,0.377629668679073,0.10278885859721,-0.0436940530162368,0.496574560157373,0.25,-0.117820529148072,-0.00740667000498961,0.211925253920569,0.384211449258594,0.46900635094611,-0.00177868380553631,-0.0103326693402775,-0.444599326203931,-0.23442851026069,0.0371181831382224,0.490153037326099,0.167370204907545,-0.0126936945914574,0,0.422429602622605,0.514295634824952,-0.0129099444873581,1.44066212670887,-0.188207872210942,0.21320071635561,0.5,-0.666666666666667,-1.03077640640442,0.0682107912304084],"name":"Reviews Sentiment Scores"}]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<p>Now we have two visualizations that give us information on our app of interest: Starbucks. This can easily be duplicated for any others… and it’s absolutely FREE.</p>
+<p>[THE END]</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>
