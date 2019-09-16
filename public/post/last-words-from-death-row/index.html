@@ -101,10 +101,11 @@
 	</header>
 
 	<article>
-		<p>A Kaggle data source <a href="https://www.kaggle.com/ianmobbs/texas-death-row-executions-info-and-last-words">here</a> provides the public with information on Texas death row inmates from 1982 to 2017.  It includes name, age, race, county, date, and last words from each person.  We will analyze this using R to conduct text analysis.</p>
+		
 
-<p>Let&rsquo;s load up tidytext to get started and then pull in the text data file.</p>
 
+<p>A Kaggle data source <a href="https://www.kaggle.com/ianmobbs/texas-death-row-executions-info-and-last-words">here</a> provides the public with information on Texas death row inmates from 1982 to 2017. It includes name, age, race, county, date, and last words from each person. We will analyze this using R to conduct text analysis.</p>
+<p>Let’s load up tidytext to get started and then pull in the text data file.</p>
 <pre><code># Set up tidytext
 require(tidytext)
 
@@ -114,13 +115,9 @@ setwd(&quot;~/Desktop/R/TX_Executions/text/&quot;)
 # Load dataset
 offenders &lt;- read.table(&quot;Last_Statement.txt&quot;)
 # offenders &lt;- readLines(file.choose())
-head(offenders)
-</code></pre>
-
+head(offenders)</code></pre>
 <p><img src = "/post/2017-11-25-last-words-from-death-row_files/offenders.png"></p>
-
-<p>Next, we&rsquo;re going to load additional libraries and convert the text document into a text corpus.</p>
-
+<p>Next, we’re going to load additional libraries and convert the text document into a text corpus.</p>
 <pre><code># Load other packages
 require(dplyr)
 require(ggplot2)
@@ -131,11 +128,8 @@ require(SnowballC)
 require(RColorBrewer)
 
 # Convert text to corpus
-lastWords &lt;- Corpus(VectorSource(offenders))
-</code></pre>
-
-<p>Text analysis often requires a fair amount of processing.  We&rsquo;ll do that here.</p>
-
+lastWords &lt;- Corpus(VectorSource(offenders))</code></pre>
+<p>Text analysis often requires a fair amount of processing. We’ll do that here.</p>
 <pre><code># Clean up text
 toSpace &lt;- content_transformer(function (x , pattern ) gsub(pattern, &quot; &quot;, x))
 lastWords &lt;- tm_map(lastWords, toSpace, &quot;/&quot;)
@@ -160,47 +154,31 @@ lastWords &lt;- tm_map(lastWords, removeWords, stopwords(&quot;english&quot;))
 lastWords &lt;- tm_map(lastWords, removePunctuation)
 
 # Eliminate extra white spaces
-lastWords &lt;- tm_map(lastWords, stripWhitespace)
-</code></pre>
-
-<p>With the cleaned-up text, we&rsquo;ll want to create a term document matrix (TDM).</p>
-
+lastWords &lt;- tm_map(lastWords, stripWhitespace)</code></pre>
+<p>With the cleaned-up text, we’ll want to create a term document matrix (TDM).</p>
 <pre><code># Construct term document matrix
 dtm &lt;- TermDocumentMatrix(lastWords)
 m &lt;- as.matrix(dtm)
 v &lt;- sort(rowSums(m),decreasing=TRUE)
 d &lt;- data.frame(word = names(v),freq=v)
-head(d, 10)
-</code></pre>
-
+head(d, 10)</code></pre>
 <p><img src="../../post/2017-11-25-last-words-from-death-row_files/tdm.png"></p>
-
-<p>Now, we&rsquo;re in a spot where we can start to analyze the data-set.  We&rsquo;re going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).</p>
-
+<p>Now, we’re in a spot where we can start to analyze the data-set. We’re going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).</p>
 <pre><code># Create word cloud
 set.seed(1234)
 wordcloud(words = d$word, freq = d$freq, min.freq = 20,
           max.words=75, random.order=FALSE, rot.per=0.00, 
-          colors=brewer.pal(4, &quot;RdGy&quot;))
-</code></pre>
-
+          colors=brewer.pal(4, &quot;RdGy&quot;))</code></pre>
 <p><img src="../../post/2017-11-25-last-words-from-death-row_files/word_cloud.png"></p>
-
-<p>We see that love stands out.  There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).</p>
-
+<p>We see that love stands out. There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).</p>
 <p>To simplify this further, we can construct a bar chart that shows the top ten words used.</p>
-
 <pre><code># Plot word frequencies
 # Bar chart
 barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
         col =&quot;grey&quot;, main =&quot;Most Spoken Last Words&quot;,
-        ylab = &quot;Frequency&quot;)
-</code></pre>
-
+        ylab = &quot;Frequency&quot;)</code></pre>
 <p><img src="../../post/2017-11-25-last-words-from-death-row_files/barchart.png"></p>
-
 <p>This shows the same information as the word cloud, but defines the rank and order with more detail.</p>
-
 <p>[THE END]</p>
 
 	</article>

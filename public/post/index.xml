@@ -23,28 +23,6 @@ Let’s load up tidytext to get started and then pull in the text data file.
     </item>
     
     <item>
-      <title>Last Words from Death Row</title>
-      <link>/post/last-words-from-death-row/</link>
-      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/last-words-from-death-row/</guid>
-      <description>A Kaggle data source here provides the public with information on Texas death row inmates from 1982 to 2017. It includes name, age, race, county, date, and last words from each person. We will analyze this using R to conduct text analysis.
-Let&amp;rsquo;s load up tidytext to get started and then pull in the text data file.
-# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset offenders &amp;lt;- read.</description>
-    </item>
-    
-    <item>
-      <title>Last Words from Death Row</title>
-      <link>/post/last-words-from-death-row/</link>
-      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/last-words-from-death-row/</guid>
-      <description>A Kaggle data source here provides the public with information on Texas death row inmates from 1982 to 2017. It includes name, age, race, county, date, and last words from each person. We will analyze this using R to conduct text analysis.
-Let&amp;rsquo;s load up tidytext to get started and then pull in the text data file.
-# Set up tidytext require(tidytext) # Set working directory setwd(&amp;quot;~/Desktop/R/TX_Executions/text/&amp;quot;) # Load dataset offenders &amp;lt;- read.</description>
-    </item>
-    
-    <item>
       <title>How Heavily Armed Is Your State?</title>
       <link>/post/how-heavily-armed-is-your-state/</link>
       <pubDate>Sat, 17 Dec 2016 00:00:00 +0000</pubDate>
@@ -52,6 +30,26 @@ Let&amp;rsquo;s load up tidytext to get started and then pull in the text data f
       <guid>/post/how-heavily-armed-is-your-state/</guid>
       <description>We will answer this question using R. First, load the dataset. It contains state names, census regions, census divisions, 2013 populations and the number of registered gun owners (also in 2013). This data comes to us from CBS News.
 # Set working directory setwd(&amp;quot;~/Desktop&amp;quot;) # Load dataset library(readxl) Firearms_Data_KAD &amp;lt;- read_excel(&amp;quot;~/Desktop/R/Per Capita Firearms Registered/Firearms_Data_KAD.xlsx&amp;quot;) head(Firearms_Data_KAD) ## # A tibble: 6 x 6 ## StateName StateLower CensusRegion Division `2013Pop` `2013Registered… ## &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; ## 1 Wyoming wyoming West Mountain 582658 114052 ## 2 District … district o… South South At… 646449 42897 ## 3 Arkansas arkansas South West Sou… 2959373 123130 ## 4 New Mexico new mexico West Mountain 2085287 84471 ## 5 Virginia virginia South South At… 8260405 248939 ## 6 Idaho idaho West Mountain 1612136 39019 Next, let’s load all of the packages we’ll use for data transformations and visualizations.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Football Data in R</title>
+      <link>/post/analyzing-football-data-in-r/</link>
+      <pubDate>Sun, 09 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/post/analyzing-football-data-in-r/</guid>
+      <description>This analysis uses 3 datasets. The first has information from the NFL draft, the second has information on NFL team statistics, and the third includes information from the Deflategate scandal involving the New England Patriots.
+Let’s load the needed data and R packages.
+# Install needed packages library(ggplot2) library(vcd) library(stats) library(car) # Load data that will be used for this analysis # Rename Football Stats dataset (with drank rankings) footballstats.</description>
+    </item>
+    
+    <item>
+      <title>Alcoholic Beverage Consumption by State</title>
+      <link>/post/alcoholic-beverage-consumption-by-state/</link>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/alcoholic-beverage-consumption-by-state/</guid>
+      <description></description>
     </item>
     
   </channel>
