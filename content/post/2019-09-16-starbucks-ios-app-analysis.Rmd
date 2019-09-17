@@ -55,8 +55,12 @@ dt <- sbux_reviews
 dt$Date <- as.Date(dt$Date)
 dt$Rating <- as.numeric(dt$Rating)    
 dt <- dt %>% select(Date,Rating) %>% group_by(Date) %>% summarise(Rating = round(mean(Rating),2))
+```
+```
+# Plot
 highchart() %>%   hc_add_series_times_values(dt$Date,dt$Rating, name = 'Average Rating')
 ```
+<img src = "/post/2019-09-16-starbucks-ios-app-analysis_files/avg_rating.png">
 
 We see that the rating is generally pretty high.  But, this doesn't take advantage of all the text users have provided.  To measure that, let's use Bing's defined sentiments to illustrate how postivie/negative the feedback is.
 
@@ -75,11 +79,16 @@ Next, we'll want to combine the sentiment scores with the words used in the revi
 ```{r}
 # pull in sbux info
 reviews_only <- as.character(sbux_reviews$Review)
-head(reviews_only)
-# plot findings
+head(reviews_only,2)
 sentiment_scores <- reviews_only %>% sentiment_by(by=NULL)
+```
+
+```
+# plot findings
 highchart() %>% hc_xAxis(sentiment_scores$element_id) %>% hc_add_series(sentiment_scores$ave_sentiment, name = 'Reviews Sentiment Scores')
 ```
+
+<img src = "/post/2019-09-16-starbucks-ios-app-analysis_files/sent_score.png">
 
 Now we have two visualizations that give us information on our app of interest: Starbucks.  This can easily be duplicated for any others... and it's absolutely FREE.
 
