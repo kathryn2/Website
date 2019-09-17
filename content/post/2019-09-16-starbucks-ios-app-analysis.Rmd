@@ -1,5 +1,5 @@
 ---
-title: Starbucks iOs App Analysis
+title: Starbucks iOS App Analysis
 author: Kathryn Daugherty
 date: '2019-09-16'
 slug: starbucks-ios-app-analysis
