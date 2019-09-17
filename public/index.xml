@@ -17,7 +17,8 @@
       <pubDate>Mon, 16 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/starbucks-ios-app-analysis/</guid>
-      <description>Have you ever wanted to see more detail behind apps on your iOS device? There’s an R package called ‘itunesr’ that allows for free extracts of user ratings and reviews.</description>
+      <description>Have you ever wanted to see more detail behind apps on your iOS device? There’s an R package called ‘itunesr’ that allows for free extracts of user ratings and reviews. Combining that with some sentiment analysis, you can examine any trends for apps of interest.
+First, you’ll need to identify an app of interest. I use the Starbucks app quite a bit and have read numerous articles about it’s success.</description>
     </item>
     
     <item>
