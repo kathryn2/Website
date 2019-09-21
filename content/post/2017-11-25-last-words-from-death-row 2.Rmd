@@ -27,8 +27,7 @@ offenders <- read.table("Last_Statement.txt")
 # offenders <- readLines(file.choose())
 head(offenders)
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/offenders.png)
-
+<img src = "/post/2017-11-25-last-words-from-death-row_files/offenders.png">
 
 Next, we're going to load additional libraries and convert the text document into a text corpus.
 
@@ -87,8 +86,7 @@ d <- data.frame(word = names(v),freq=v)
 head(d, 10)
 ```
 
-![](/post/2017-11-25-last-words-from-death-row_files/tdm.png)
-
+<img src="/post/2017-11-25-last-words-from-death-row_files/tdm.png">
 
 Now, we're in a spot where we can start to analyze the data-set.  We're going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).
 
@@ -99,11 +97,12 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 20,
           max.words=75, random.order=FALSE, rot.per=0.00, 
           colors=brewer.pal(4, "RdGy"))
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/word_cloud.png)
+
+<img src="/post/2017-11-25-last-words-from-death-row_files/word_cloud.png">
 
 We see that love stands out.  There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).
 
-To simplify this further, we can construct a bar chart that shows the top ten words used.
+To simplify this further, we can construct a bar chart that shows the top fifteen words used.
 
 ```
 # Plot word frequencies
@@ -112,7 +111,8 @@ barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
         col ="grey", main ="Most Spoken Last Words",
         ylab = "Frequency")
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/barchart.png)
+
+<img src="/post/2017-11-25-last-words-from-death-row_files/barchart.png">
 
 This shows the same information as the word cloud, but defines the rank and order with more detail.
 

@@ -25,10 +25,7 @@ setwd(&quot;~/Desktop/R/TX_Executions/text/&quot;)
 offenders &lt;- read.table(&quot;Last_Statement.txt&quot;)
 # offenders &lt;- readLines(file.choose())
 head(offenders)</code></pre>
-<div class="figure">
-<img src="/post/2017-11-25-last-words-from-death-row_files/offenders.png" />
-
-</div>
+<p><img src = "/post/2017-11-25-last-words-from-death-row_files/offenders.png"></p>
 <p>Next, we’re going to load additional libraries and convert the text document into a text corpus.</p>
 <pre><code># Load other packages
 require(dplyr)
@@ -74,30 +71,21 @@ m &lt;- as.matrix(dtm)
 v &lt;- sort(rowSums(m),decreasing=TRUE)
 d &lt;- data.frame(word = names(v),freq=v)
 head(d, 10)</code></pre>
-<div class="figure">
-<img src="/post/2017-11-25-last-words-from-death-row_files/tdm.png" />
-
-</div>
+<p><img src="/post/2017-11-25-last-words-from-death-row_files/tdm.png"></p>
 <p>Now, we’re in a spot where we can start to analyze the data-set. We’re going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).</p>
 <pre><code># Create word cloud
 set.seed(1234)
 wordcloud(words = d$word, freq = d$freq, min.freq = 20,
           max.words=75, random.order=FALSE, rot.per=0.00, 
           colors=brewer.pal(4, &quot;RdGy&quot;))</code></pre>
-<div class="figure">
-<img src="/post/2017-11-25-last-words-from-death-row_files/word_cloud.png" />
-
-</div>
+<p><img src="/post/2017-11-25-last-words-from-death-row_files/word_cloud.png"></p>
 <p>We see that love stands out. There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).</p>
-<p>To simplify this further, we can construct a bar chart that shows the top ten words used.</p>
+<p>To simplify this further, we can construct a bar chart that shows the top fifteen words used.</p>
 <pre><code># Plot word frequencies
 # Bar chart
 barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
         col =&quot;grey&quot;, main =&quot;Most Spoken Last Words&quot;,
         ylab = &quot;Frequency&quot;)</code></pre>
-<div class="figure">
-<img src="/post/2017-11-25-last-words-from-death-row_files/barchart.png" />
-
-</div>
+<p><img src="/post/2017-11-25-last-words-from-death-row_files/barchart.png"></p>
 <p>This shows the same information as the word cloud, but defines the rank and order with more detail.</p>
 <p>[THE END]</p>

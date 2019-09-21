@@ -1,8 +1,8 @@
 ---
-title: Last Words from Death Row
+title: Death Row Last Words
 author: Kathryn Daugherty
 date: '2017-11-25'
-slug: last-words-from-death-row
+slug: death-row-last-words
 categories: []
 tags: []
 css: []
@@ -11,11 +11,9 @@ highlight: yes
 scripts: []
 ---
 
-A Kaggle data source <a href="https://www.kaggle.com/ianmobbs/texas-death-row-executions-info-and-last-words">here</a> provides the public with information on Texas death row inmates from 1982 to 2017.  It includes name, age, race, county, date, and last words from each person.  We will analyze this using R to conduct text analysis.
+From Kaggle, we get a <a href="https://www.kaggle.com/ianmobbs/texas-death-row-executions-info-and-last-words">data set</a> including last words from Texas death row inmates.  It has names, ages, race, county, date and statements for each person spanning from 1982 to 2017.  We're going to use R to identify common words/themes.
 
-Let's load up tidytext to get started and then pull in the text data file.
-
-```
+```{r}
 # Set up tidytext
 require(tidytext)
 
@@ -24,15 +22,14 @@ setwd("~/Desktop/R/TX_Executions/text/")
 
 # Load dataset
 offenders <- read.table("Last_Statement.txt")
-# offenders <- readLines(file.choose())
+#offenders <- readLines(file.choose())
 head(offenders)
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/offenders.png)
 
+Let's load required R packages and make a text corpus.
 
-Next, we're going to load additional libraries and convert the text document into a text corpus.
+```{r}
 
-```
 # Load other packages
 require(dplyr)
 require(ggplot2)
@@ -44,11 +41,12 @@ require(RColorBrewer)
 
 # Convert text to corpus
 lastWords <- Corpus(VectorSource(offenders))
+inspect(lastWords)
 ```
 
-Text analysis often requires a fair amount of processing.  We'll do that here.
+Let's clean up the verbiage and formatting so they are easier to analyze.
 
-```
+```{r}
 # Clean up text
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
 lastWords <- tm_map(lastWords, toSpace, "/")
@@ -76,9 +74,9 @@ lastWords <- tm_map(lastWords, removePunctuation)
 lastWords <- tm_map(lastWords, stripWhitespace)
 ```
 
-With the cleaned-up text, we'll want to create a term document matrix (TDM).
+Now we'll create the term document matrix (TDM).
 
-```
+```{r}
 # Construct term document matrix
 dtm <- TermDocumentMatrix(lastWords)
 m <- as.matrix(dtm)
@@ -87,33 +85,26 @@ d <- data.frame(word = names(v),freq=v)
 head(d, 10)
 ```
 
-![](/post/2017-11-25-last-words-from-death-row_files/tdm.png)
+To get a feel for the most common words, lets look at the top 75 that occur at least 20 times.  We'll viualize this in a word cloud.
 
-
-Now, we're in a spot where we can start to analyze the data-set.  We're going to create a word cloud that shows the 75 most frequently used words (while also ensuring each word shown is used at least 20 times).
-
-```
+```{r}
 # Create word cloud
 set.seed(1234)
 wordcloud(words = d$word, freq = d$freq, min.freq = 20,
           max.words=75, random.order=FALSE, rot.per=0.00, 
           colors=brewer.pal(4, "RdGy"))
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/word_cloud.png)
+Love is the most spoken word.  We see thoughts of remorse (sorry and foregiveness), focus on religion/spirituality (God, lord, pray, etc.) and family.
 
-We see that love stands out.  There are other themes such as religion (faith, god, jesus, lord and christ) and remorse (forgive, pain and sorry).
+To see the top 10 words in a more concise format, we'll construct a bar chart.
 
-To simplify this further, we can construct a bar chart that shows the top ten words used.
-
-```
+```{r}
 # Plot word frequencies
 # Bar chart
 barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
         col ="grey", main ="Most Spoken Last Words",
         ylab = "Frequency")
 ```
-![](/post/2017-11-25-last-words-from-death-row_files/barchart.png)
-
-This shows the same information as the word cloud, but defines the rank and order with more detail.
+Again, we see that "love" is the most used word.  
 
 [THE END]
