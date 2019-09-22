@@ -1,0 +1,17 @@
+---
+title: Grapefruit League Infographic
+author: Kathryn Daugherty
+date: '2014-03-09'
+slug: grapefruit-league-infographic
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+For a project in my data visualization class, I created an infographic summarizing some information on the Grapefruit League.  Every spring, American baseball teams move to Florida (Grapefruit League) or Arizona (Cactus League) to train.  There are multiple teams in the Orlando area, which is what inspired me to examine this particular topic. 
+
+A PDF of the report and final infographic can be found <a href="https://github.com/kathryn2/R_Projects/blob/master/DaughertyIA5.pdf">here</a>.  The following will walk through how the base R images were created.  Most were then edited with <a href="https://inkscape.org/">Inkscape</a>, which is an amazing, open-source graphics editor.
+
