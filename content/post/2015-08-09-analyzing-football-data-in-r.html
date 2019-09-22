@@ -1,0 +1,165 @@
+---
+title: Analyzing Football Data in R
+author: Kathryn Daugherty & Chelsea Pumphrey
+date: '2015-08-09'
+slug: analyzing-football-data-in-r
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+
+<p>This analysis uses 3 datasets. The first has information from the NFL draft, the second has information on NFL team statistics, and the third includes information from the Deflategate scandal involving the New England Patriots.</p>
+<p>Let’s load the needed data and R packages.</p>
+<pre><code># Install needed packages
+library(ggplot2)
+library(vcd)
+library(stats)
+library(car)</code></pre>
+<pre><code># Load data that will be used for this analysis
+# Rename Football Stats dataset (with drank rankings) 
+footballstats.data &lt;- read.csv(&quot;Dataset1FootballStats.csv&quot;)
+# Rename Team Football Stats dataset 
+teamfootballstats.data &lt;- read.csv(&quot;Dataset2TeamFootballStats.csv&quot;)
+# Rename Deflategate dataset 
+football.data &lt;- read.csv(&quot;Dataset3FootballDeflatagate.csv&quot;)</code></pre>
+<p><b>Part 1: Draft Rankings</b> First performed an exploratory data analysis to understand the NFL draft data after adding the team records to this dataset, looking specifically at the relationship between team record and draft order.</p>
+<p>Q: For the dataset analyzed, what round(s) were the players drafted in most?</p>
+<pre><code>hist(footballstats.data$Rank,breaks=10, col=&quot;green&quot;, border = &quot;blue&quot;, main = &quot;Histogram of Rank&quot;) </code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/rank_histo.png"></p>
+<p>A: Most of these players were drafted in the lower rounds.</p>
+<p>Q: Of the teams that drafted these players, how often did they win games?</p>
+<pre><code>hist(footballstats.data$Wins,breaks=10, col=&quot;green&quot;, border = &quot;blue&quot;, main = &quot;Histogram of Wins&quot;)</code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/wins_histo.png"></p>
+<p>A: Wins of teams that drafted these players vary substantially.</p>
+<p>Q: Is there a relationship between draft position and team losses?</p>
+<pre><code>plot(footballstats.data$Rank, footballstats.data$Losses) + title(main=&quot;Scatter Plot of Draft Rank to Team Losses&quot;)</code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/scatter_rank_losses.png"></p>
+<pre><code>#Correlations
+cor(footballstats.data$Rank, footballstats.data$Wins, use=&quot;complete&quot;, method=&quot;pearson&quot;) 
+# 0.4007555
+cor(footballstats.data$Grade, footballstats.data$Rank, use=&quot;complete&quot;, method=&quot;pearson&quot;)
+# -0.5723498</code></pre>
+<p>Correlation of Rank to Team Wins: These correlations indicate a moderate to strong positive relationship of Player Rank to number of team wins of the drafting NFL team. The more team wins, the lower the rank of their draft pick. This makes sense as draft order is established based on team record, but there is not a stronger correlation because 1) teams can trade up in the draft and 2) every team has different player needs, so team do not always draft the highest rank player, but instead the best player on the board given their team needs.</p>
+<p>Correlation of Rank to Draft Order: This shows there is a strong negative correlation between rank and draft order. This indicates that the higher the player rank, the lower the draft order. Again this correlation is not perfect as not every team picks the highest player on the board.</p>
+<p><b>Part 2: Team Statistics</b></p>
+<p>Were wins spread evenly across both divisions (AFC and NFC)?</p>
+<pre><code># Data prep
+teamfootballstats.data$Wins &lt;- as.numeric(as.character(footballstats.data$Rank)) 
+NFC &lt;- subset(teamfootballstats.data,NFC==1)
+AFC &lt;- subset(teamfootballstats.data,NFC==0)
+Redskins &lt;- subset(teamfootballstats.data,Team.Name==&quot;Washington.Redskins&quot;) 
+Tampa &lt;- subset(teamfootballstats.data,Team.Name==&quot;Tampa.Bay.Bucaneers&quot;) 
+Jaguars &lt;- subset(teamfootballstats.data,Team.Name==&quot;Jacksonville.Jaguars&quot;)</code></pre>
+<pre><code># Now, lets plot histograms to compare
+#histogram
+hist(teamfootballstats.data$Wins,breaks=10, col=&quot;blue&quot;, border = &quot;green&quot;, main = &quot;Histogram of Wins - ALL TEAMS&quot;)</code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/all_wins.png"></p>
+<pre><code>hist(NFC$Wins,breaks=10, col=&quot;blue&quot;, border = &quot;green&quot;, main = &quot;Histogram of Wins - NFC&quot;) </code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/nfc_wins.png"></p>
+<pre><code>hist(AFC$Wins,breaks=10, col=&quot;blue&quot;, border = &quot;green&quot;, main = &quot;Histogram of Wins - AFC&quot;)</code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/afc_wins.png"></p>
+Take-a-ways:<br />
+
+<li>
+There were many teams in the NFC with an “average” record.<br />
+
+<li>
+<p>AFC had more teams with a greater number of wins.</p>
+Next, we want to compare the number of NFC wins to the AFC wins to see if they are equal, or if there is a more “dominant” division. As there are only 2 groups that to compare, an independent t-test can be used. This has the following assumptions:
+<li>
+Dependent variable measured on a continuous scale (number of wins)
+<li>
+Independent variable should consist of two categorical, independent groups (2 NFL teams)
+<li>
+Independence of observations
+<li>
+No significant outliers
+<li>
+Normal distribution of the dependent variable of interest
+<li>
+<p>Homogeneity of variances</p>
+T-test will be used to test the following hypotheses:
+<li>
+Ho: μ=μ0: The mean wins of the NFC and AFC are equal
+<li>
+<p>H1:μ≠μ0: The mean wins of NFC and AFC are not equal</p>
+<pre><code>#T-Test
+t.test(NFC$Wins, AFC$Wins)</code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/wins_ttest.png"></p>
+<p>Conclusion: Since the p-value is &gt; .05 we fail to reject the null hypothesis, and therefore conclude that the means wins between AFC and NFC are equal. There is some concern over independence of observations however since the football schedules are designed in a way that may lead to these results.</p>
+ANOVA was used to compare win/loss records of teams in the playoffs to see if there are any significant differences. ANOVA has the following assumptions:
+<li>
+The dependent variable is normally distributed in each group that is being compared
+<li>
+Homogeneity of Variances
+<li>
+<p>Independence of Variances</p>
+ANOVA will be used to test the following hypotheses:
+<li>
+Ho: No relationship between playoffs and wins/losses
+<li>
+<p>H1: Is a relationship between being in playoffs and wins/losses</p>
+<pre><code>#ANOVA
+anova.Wins &lt;- aov(Playoff.Berth ~ Wins + Loss, data=teamfootballstats.data) 
+summary(anova.Wins)</code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/anova_wins.png"></p>
+<p>Conclusion: Since the p-value is &lt; .05 we can reject the null hypothesis, and therefore conclude that there is a significant relationship between being in the playoffs and win/loss record.</p>
+<p>Finally, linear regression will be used to predict number of wins given playoff position or odds of making it to the playoffs given a number of wins. Dummy variables were used to classify teams that clinched a playoff spot, home field advantage, and a first round bye.</p>
+Linear regression makes the following assumptions:
+<li>
+Linear relationship
+<li>
+Multivariate normality
+<li>
+Little multicollinearity
+<li>
+No auto-correlation
+<li>
+<p>Homoscedasticity</p>
+<pre><code>#Regression - Number of wins
+fit.Wins &lt;- lm(Wins ~ Playoff.Berth + Clinched.Division + Clinched.1st.Round.Bye, data=teamfootballstats.data) 
+coefficients(fit.Wins)</code></pre>
+<p><img src = "/post/2015-08-09-analyzing-football-data-in-r_files/regression_wins.png"></p>
+<p>The resulting equation is: Wins = 6.2 + (4.47 x Playoffs) + (0.48 x Division) + (1.29 x First Round Bye)</p>
+<p>Given this, if a team in 2015 went to the playoffs, they likely won at least 10 games. If a team made it to the playoffs with a first round bye, they most likely won over 12 games.</p>
+<p>A second regression is done to predict likelihood of playoffs given number of regular season wins.</p>
+<pre><code>#Regression - Playoffs
+fit.Playoffs &lt;- lm(Playoff.Berth ~ Wins, data=teamfootballstats.data) 
+coefficients(fit.Playoffs)</code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/playoffs_coeffs.png"></p>
+<p>The resulting equation is: Playoffs = -0.53 + (0.114 x Wins) Given this, if a team won 12 games in 2015 they would have ~84% chance of making it to the playoffs.</p>
+<p><b>Part 3: Deflategate</b></p>
+<p>Let’s do some data prep.</p>
+<pre><code># create Colts &amp; Patriots data subsets
+Colts &lt;- subset(football.data,Team==&quot;Colts&quot;) 
+Patriots &lt;- subset(football.data, Team==&quot;Patriots&quot;)
+# prep deflategate data too
+football.data2&lt;-read.csv(&quot;Dataset3FootballDeflatagatev2.csv&quot;)</code></pre>
+<p>Correlations between officials</p>
+<pre><code>#correlation between Blakeman and Prioleau
+cor(football.data$Blakeman, football.data$Prioleau, use=&quot;complete&quot;, method=&quot;pearson&quot;)
+# 0.9218864</code></pre>
+<p>The correlation between the two officials’ measurements on the air inflation of the footballs. Using R, I found the correlation between Blakeman and Prioleau to be 0.9218864. This is a very strong correlation, indicating that both officials had similar results of ball pressure, making any differences between the teams less likely to be due to measurement error.</p>
+<p>Some more data prep:</p>
+<pre><code># Create Colts &amp; Patriots data subsets
+Colts2 &lt;- subset(football.data2,Team==&quot;Colts&quot;) 
+Patriots2 &lt;- subset(football.data2, Team==&quot;Patriots&quot;)</code></pre>
+Next, let’s compare the Colts and Patriots ball pressures using an independent t-test. These analytics were run using Blakeman’s measurements, Prioleau’s measurements, and both officials combined.
+<li>
+Ho: μ = μ0: The mean of ball pressure between Patriots and Colts is equal
+<li>
+<p>H1: μ ≠ μ0: The mean of ball pressure between Patriots and Colts is not equal</p>
+<pre><code>t.test(Colts$Blakeman, Patriots$Blakeman) </code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/t1.png"></p>
+<pre><code>t.test(Colts$Prioleau, Patriots$Prioleau)</code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/t2.png"></p>
+<pre><code># Were the balls inflated similarly?
+t.test(Colts2$Pressure, Patriots2$Pressure)</code></pre>
+<p><img src="/post/2015-08-09-analyzing-football-data-in-r_files/t3.png"></p>
+<p>Conclusion: In all cases above since the p-value is &lt; .05 we can reject the null hypothesis, and therefore conclude that the means of ball pressure between the Colts and the Patriots is significantly different (regardless of official). We can see from the means that the Patriots ball pressure was lower, confirming that they played that game with less inflated balls.</p>
+<p>[THE END]</p>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-09-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-09-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/starbucks-ios-app-analysis/</loc>
+    <lastmod>2019-09-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/comparing-skills-across-occupations/</loc>
+    <lastmod>2018-08-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/last-words-from-death-row/</loc>
+    <lastmod>2017-11-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/how-heavily-armed-is-your-state/</loc>
+    <lastmod>2016-12-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tutorial/custom-css/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/hugo/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/series/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tutorial/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tutorial/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tutorial/getting-started/</loc>
+    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/analyzing-football-data-in-r/</loc>
+    <lastmod>2015-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/grapefruit-league-infographic/</loc>
+    <lastmod>2014-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+</urlset>
