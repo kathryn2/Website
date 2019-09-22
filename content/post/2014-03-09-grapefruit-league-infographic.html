@@ -1,0 +1,171 @@
+---
+title: Grapefruit League Infographic
+author: Kathryn Daugherty
+date: '2014-03-09'
+slug: grapefruit-league-infographic
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+
+<p>For a project in my data visualization class, I created an infographic summarizing some information on the <a href="http://www.floridagrapefruitleague.com/">Grapefruit League</a>. Every spring, American baseball teams move to Florida (Grapefruit League) or Arizona (<a href="https://cactusleague.com/">Cactus League</a>) to train. There are multiple teams in the Orlando area every year, which is what inspired me to examine this particular topic.</p>
+<p>A PDF of the report and final infographic can be found <a href="https://github.com/kathryn2/R_Projects/blob/master/DaughertyIA5.pdf">here</a>. The following will walk through how the base R images were created. Most were then edited with <a href="https://inkscape.org/">Inkscape</a>, which is an amazing, open-source graphics editor.</p>
+<p>Data was foraged from many websites, pamphlets and other resources. Details can be found on the “References” page in the final report. I saved all of the information in a single Excel spreadsheet, with different worksheets holding information intended for different charts.</p>
+<pre><code>library(readxl)
+moass &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                            sheet = &quot;MOASS&quot;)
+springtraining &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;SpringTraining&quot;)
+minmaxprices &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;MinMaxPrices&quot;)
+prices &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;Prices&quot;)
+moass2 &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;MOASS&quot;)
+performance &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;Perf2013&quot;)
+preseason &lt;- read_excel(&quot;~/Desktop/DaughertyData.xlsx&quot;, 
+                    sheet = &quot;PreSeason&quot;)</code></pre>
+<p>(FYI: MOASS = Mother of all spreadsheets.)</p>
+<p>This was done when I was just starting to use R, so please foregive some of the ineffiencies and certainly the following long list of pacakges pulled in.</p>
+<pre><code># load needed libraries
+library(ggplot2)
+library(maps)
+library(gcookbook)
+library(xlsxjars)
+library(rJava)
+library(xlsx)
+library(maps)
+library(grid)
+library(gridExtra)
+library(ggplot2)
+library(graphics)
+library(lattice)
+library(car)
+library(reshape)
+library(plyr)
+library(GGally)
+library(googleVis)
+library(stats)
+library(maptools)
+library(RColorBrewer)
+library(classInt)
+library(scales)
+library(XML)
+library(ggsubplot)</code></pre>
+<p>Next, we create the base graphics that will later be improved upon with Inkscape.</p>
+<pre><code># begin plots for graphic
+
+# create scatterplot matrix
+formatrix &lt;- subset(moass, select = -c(2:13,15:19,22,24,25,27))
+matrix1 &lt;- ggpairs(formatrix[,2:6], 
+                   title = &quot;Relationships Between Attendance, Capacity &amp; Price in the Grapefruit League&quot;,  
+                   upper = list(continuous = &quot;smooth&quot;), 
+                   lower = list(continuous = &quot;smooth&quot;), 
+                   diag = list(continuous = &quot;density&quot;), 
+                   axisLabels = &quot;show&quot;)
+matrix1</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/1.png"></p>
+<p>Next, we map out different data to explore what might be insightful. Let’s start of with examining which counties in the state host the Grapefruit League.</p>
+<pre><code># create a map of florida illustrating where the teams play (which counties)
+fl_map &lt;- map(&quot;county&quot;, regions = &quot;florida&quot;, plot = FALSE, fill = TRUE)
+fl_map &lt;- fortify(fl_map)
+fl_map &lt;- ddply(fl_map, &quot;subregion&quot;, function(df){mutate(df, fake = rnorm(1))})
+f &lt;- ggplot(fl_map, aes(x = long, y = lat, group = group, fill = fake))
+f &lt;- f + geom_polygon(colour = &quot;white&quot;, size = 0.5)
+f  # this creates a map of FLorida with randomly colored blue counties</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/2.png"></p>
+<pre><code>fans_map &lt;- subset(moass2, select = -c(2:7,9,12,15:18,23:28))  # this selects only counties with teams
+fl_fans &lt;- merge(fl_map, fans_map, by.x=&quot;names&quot;, by.y=&quot;MapCounty&quot;)
+# the following generates gradient values for MOASS data sets
+totattend.gradient &lt;- c(min(fans_map$TotalAttendance2013), median(fans_map$TotalAttendance2013), max(fans_map$TotalAttendance2013))
+totcap.gradient &lt;- c(min(fans_map$StadiumCapacity), median(fans_map$StadiumCapacity), max(fans_map$StadiumCapacity))
+avgattend.gradient &lt;- c(min(fans_map$AvgAttendance2013), median(fans_map$AvgAttendance2013), max(fans_map$AvgAttendance2013))
+avgutil.gradient &lt;- c(min(fans_map$AvgUtil2013), median(fans_map$AvgUtil2013), max(fans_map$AvgUtil2013))
+print(totattend.gradient)
+# 53602 106102 164840
+print(totcap.gradient)
+# 5300 8100 11026
+print(avgattend.gradient)
+# 3350 6229 10300
+print(avgutil.gradient)
+# 0.62 0.79 0.98
+colors = c(&quot;&quot;)
+fl1 &lt;- map(&quot;county&quot;, &quot;Florida&quot;)  # this generates a plain map of FL; just black outlines of counties
+fl2 &lt;- map(&quot;county&quot;, fl1$names[c(5,8,29,36,51,50,53,59,54,57,41)], fill=TRUE, col=c(&quot;#009d00&quot;), add=TRUE)  # this colors counties with teams dk. green
+fl2</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/4.png"></p>
+<pre><code># create maps of FL with counties and color indicating total 2013 attendance and 2014 capacity
+florida &lt;- map(&quot;county&quot;, regions = &quot;Florida&quot;, plot = FALSE, fill=TRUE)
+florida &lt;- fortify(florida)
+attend &lt;- subset(moass2, select = -c(2:9,15:18,23:28))  # this selects only counties with teams
+attendmap &lt;- merge(florida, attend, by.x=&quot;subregion&quot;, by.y=&quot;County&quot;)
+# head(attendmap)
+attendmap &lt;- arrange(attendmap, group, order)
+# head(attendmap)
+# head(florida)
+# head(attend)
+
+tota &lt;- (qplot(long, lat, data = attendmap, geom = &quot;polygon&quot;, group = group, colour = I(&quot;white&quot;), fill = TotalAttendance2013, size = I(0.75)) + theme_bw() + labs(x=&quot;&quot;, y=&quot;&quot;, fill=&quot;&quot;) + scale_fill_gradient(low=&#39;#b1ffb1&#39;, high=&#39;darkgreen&#39;) + opts(title=&quot;Total Spring Training Attendance in 2013 &quot;, legend.position=&quot;bottom&quot;, legend.direction=&quot;horizontal&quot;) + theme(panel.grid.major=element_blank(), panel.border=element_blank(), axis.text=element_blank()))
+
+tota</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/5.png"></p>
+<pre><code>stdcp &lt;- (qplot(long, lat, data = attendmap, geom = &quot;polygon&quot;, group = group, colour = I(&quot;white&quot;), fill = StadiumCapacity, size = I(0.75)) + theme_bw() + labs(x=&quot;&quot;, y=&quot;&quot;, fill=&quot;&quot;) + scale_fill_gradient(low=&#39;#d18e4a&#39;, high=&#39;#68421a&#39;) + opts(title=&quot;Total Grapefruit League Stadium Capcity by County&quot;, legend.position=&quot;bottom&quot;, legend.direction=&quot;horizontal&quot;)+ theme(panel.grid.major=element_blank(), panel.border=element_blank(), axis.text=element_blank()))
+
+stdcp</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/6.png"></p>
+<p>Let’s next create a black map of Florida that shows stadium capacities from last season (2013). We’ll color the two leagues (National and American) to see if that makes a difference. First, let’s generate just the map.</p>
+<pre><code># create map of FL with stadium locations and circles indicating avg. utilization
+florida_map &lt;- map_data(&quot;county&quot;,&quot;Florida&quot;)
+baseplot &lt;- ggplot() + coord_fixed()
+base_florida &lt;- baseplot + geom_polygon(data=florida_map, aes(x=long, y=lat, group=group)) + theme_bw() + labs(x=NA, y=NA, fill=NA) + theme(panel.grid.major=element_blank(), panel.background=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(), axis.text.x=element_blank(), axis.text.y=element_blank(), panel.border=element_blank())
+base_florida # this creates a solid black image of florida</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/7.png"></p>
+<p>Next, let’s add to this background.</p>
+<pre><code>geo_data &lt;- data.frame(long=c(-81.556, -82.5172, -81.7633, -81.9508, -80.1164, -81.3639, -80.4045, -82.5067, -81.8419, -82.7317, -82.5703, -80.1164, -82.1817, -82.7864, -80.7061), lat=c(28.3371, 27.3478, 26.5481, 28.0747, 26.8911, 28.2983, 27.3253, 27.9803, 26.5383, 27.9717, 27.4854, 26.8911, 26.9992, 28.0036, 28.2569), value=c(79, 94, 90, 89, 62, 63, 70, 93, 72, 98, 73, 88, 72, 89, 66), colour=rep(c(&quot;National&quot;,&quot;American&quot;,&quot;American&quot;,&quot;American&quot;,&quot;National&quot;,&quot;American&quot;,&quot;National&quot;,&quot;American&quot;,&quot;American&quot;,&quot;National&quot;,&quot;National&quot;,&quot;National&quot;,&quot;American&quot;,&quot;American&quot;,&quot;National&quot;)))
+map_with_jitter &lt;- base_florida + geom_point(data=geo_data, aes(x=long, y=lat, colour=colour, size=value), position=&quot;jitter&quot;, alpha=I(1))
+utilmap &lt;- map_with_jitter + ggtitle(&quot;Average Grapefruit League Stadium Utilizations in 2013&quot;) + theme(panel.grid.major=element_blank(), panel.background=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(), panel.border=element_blank(), axis.text.x=element_blank(), axis.text.y=element_blank(), plot.title=element_text(size=20, face=&quot;bold&quot;))
+plot(utilmap)</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/8.png"></p>
+<p>The above chart will be used in the infographic. Note that a jitter is needed due to some stadiums hosting multiple teams. It shows geographic dispersion like the choropleth county map, but adds more information.</p>
+<p>Next, let’s look at win percentages and pre-season rankings of teams.</p>
+<pre><code># create a chart that shows 2013 winpercentages
+winpct &lt;- ggplot(performance, aes(x=WinPct2013, y=reorder(Team, -OrderofPricesChart))) + geom_segment(aes(yend=Team), xend=0, colour=&quot;khaki&quot;, size=2) + geom_point(size=4, aes(colour=League)) + scale_color_brewer(palette=&quot;Set2&quot;, limits=c(&quot;American&quot;,&quot;National&quot;), guide=FALSE) + theme_bw() + theme(panel.grid.major.y = element_blank(), legend.position=c(1, 0.55), legend.justification=c(1, 0.5))
+winpct</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/11.png"></p>
+<pre><code># create a chart that shows pre-season rankings
+rankings &lt;- ggplot(preseason, aes(x=-PreSeasonRank, y=reorder(Team, -OrderPriceChart))) + geom_segment(aes(yend=Team), xend=-0, colour=&quot;lightgreen&quot;, size=2) + geom_point(size=4, aes(colour=League)) + scale_color_brewer(palette=&quot;Set3&quot;, limits=c(&quot;American&quot;,&quot;National&quot;), guide=FALSE) + theme_bw() + theme(panel.grid.major.y= element_blank(), legend.position=c(1, 0.55), legend.justification=c(1, 0.5))
+rankings</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/12.png"></p>
+<p>Since a rank of 1 is good, we’ve done the negative value such that the dots farthest to the right are associated with the more desirable rankings. This will also be edited for the final infographic.</p>
+<p>Finally, we’ll create charts that show spreads in ticket and parking prices.</p>
+<pre><code># create chart illustrating spread in ticket prices per team
+head(minmaxprices)
+price0 &lt;- ggplot(minmaxprices, aes(x=reorder(Order,Team), y=Price))
+price00 &lt;- price0 + geom_violin() + 
+  ggtitle(&quot;Range in 2014 Prices Per Grapefruit League Team&quot;) + 
+  theme_bw() + theme(panel.grid.minor=element_blank(), 
+                     panel.border=element_blank(), plot.title=element_text(size=20, 
+                     face=&quot;bold&quot;), panel.background=element_rect(fill=&quot;beige&quot;))
+price00</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/9.png"></p>
+<pre><code># create chart illustrating price in parking fees per teams and leagues, highlighting Disney
+price40 &lt;- ggplot(moass, aes(x=reorder(Parking, ParkOrder), fill=Disney)) 
+  + geom_histogram(position=&quot;identity&quot;, alpha=0.5) + facet_grid(League ~ ., scales=&quot;free&quot;)
+pricechart &lt;- price40 + theme_bw() + 
+    ggtitle(&quot;Parking Fees Across the League&quot;) + 
+    theme(plot.title=element_text(size=20, face=&quot;bold&quot;), 
+        panel.grid.minor=element_blank(), panel.grid.major=element_blank(), 
+        strip.background=element_rect(fill=&quot;tan&quot;), legend.title=element_blank(), 
+        legend.background=element_blank(), legend.text=element_blank(), 
+        legend.key=element_blank(), strip.text.y=element_text(size=12, face=&quot;bold&quot;))
+pricechart</code></pre>
+<p><img src="/post/2014-03-09-grapefruit-league-infographic_files/10.png"></p>
+<p>Both of those charts are included in the final infographic as well. Price comparisons of the venues is not published elsewhere, so this contributes towards an informative graphic.</p>
+<p>To see the final infographic, go <a href="https://github.com/kathryn2/R_Projects/blob/master/DaughertyIA5.pdf">here</a> and scroll to page 3.</p>
+<p>[THE END]</p>

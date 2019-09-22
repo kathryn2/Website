@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Hurricane Dorian in the News">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-09-22">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/hurricane-dorian-in-the-news/">
+    <meta property="og:site_name" content="Hello World!">
+    
+    <meta name="generator" content="Hugo 0.58.2" />
+    <title>Hurricane Dorian in the News &middot; Hello World!</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
+    
+    
+    <link rel="icon" href="../../coffee_to_go_icon_124542.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Kathryn A Daugherty</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Kathryn A Daugherty</a></h1>
+		
+		
+		
+		
+		
+			<img id="profile-pic" src="//img/kathryn_img.jpg" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://www.linkedin.com/in/kathryn22/"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://www.instagram.com/kathryn2ann/"><i class="fa fa-instagram fa-2x"></i></a>
+			
+				<a href="https://www.facebook.com/kathryn22ann"><i class="fa fa-facebook fa-2x"></i></a>
+			
+				<a href="https://public.tableau.com/profile/kathryn.khaki.daugherty"><i class="fa fa-laptop fa-2x"></i></a>
+			
+				<a href="https://github.com/kathryn2"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://my.playstation.com/profile/Kathryn_D"><i class="fa fa-gamepad fa-2x"></i></a>
+			
+
+			<a href="mailto:kadplaystennis@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Hurricane Dorian in the News</h1>
+	</header>
+
+	<article>
+		
+
+
+<p>The ‘newsflash’ package is something I played with back in 2017 during Hurricane Irma. Having recently been under watch for Dorian, I’m revisiting it to visualize it’s news coverage.</p>
+<pre class="r"><code># Set CRAN Mirror
+options(repos = c(CRAN = &quot;http://cran.rstudio.com&quot;))
+
+# Set time zone
+options(tz=&quot;America/New_York&quot;)
+
+# Newsflash documentation
+# https://github.com/hrbrmstr/newsflash
+
+# Install packages
+# devtools::install_github(&quot;hrbrmstr/newsflash&quot;)
+# install.packages(&quot;tidyverse&quot;)
+# install.packages(&quot;ggalt&quot;)
+# install.packages(&quot;brbrthemes&quot;)
+# install.packages(&quot;anytime&quot;)
+
+# Load libraries
+library(newsflash)</code></pre>
+<pre><code>## NOTE: There are breaking changes to the package API due to GDELT&#39;s v2 API</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
+## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
+## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(ggalt)
+library(hrbrthemes)</code></pre>
+<pre><code>## NOTE: Either Arial Narrow or Roboto Condensed fonts are *required* to use these themes.</code></pre>
+<pre><code>##       Please use hrbrthemes::import_roboto_condensed() to install Roboto Condensed and</code></pre>
+<pre><code>##       if Arial Narrow is not on your system, please see http://bit.ly/arialnarrow</code></pre>
+<pre class="r"><code>library(anytime) # Get errors without this</code></pre>
+<pre><code>## Warning: package &#39;anytime&#39; was built under R version 3.5.2</code></pre>
+<p>Let’s look at Chryons before we examine network TV.</p>
+<pre class="r"><code># Look at chryons (captioning)
+ch &lt;- read_chyrons(&quot;2019-09-02&quot;)
+head(ch)</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   ts                  channel duration details           text             
+##   &lt;dttm&gt;              &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;            
+## 1 2019-09-02 00:00:00 MSNBCW        20 MSNBCW_20190901_… &quot;NATIONAL HURRIC…
+## 2 2019-09-02 00:01:00 CNNW          59 CNNW_20190902_00… HURRICANE DORIAN…
+## 3 2019-09-02 00:02:00 MSNBCW        30 MSNBCW_20190901_… NEW UPDATE ON HU…
+## 4 2019-09-02 00:03:00 CNNW          45 CNNW_20190902_00… &quot;HURRICANE DORIA…
+## 5 2019-09-02 00:04:00 CNNW          62 CNNW_20190902_00… HURRICANE WARNIN…
+## 6 2019-09-02 00:04:00 MSNBCW        49 MSNBCW_20190901_… &quot;NATIONAL HURRIC…</code></pre>
+<p>Within the news on Labor Day, how often was Dorian mentioned? We’ll create a column just for that purpose.</p>
+<pre class="r"><code># Examine where Dorian mentioned (&quot;mention&quot; column)
+# Convert time to hourly chunks (&quot;hour&quot; column)
+ch2 &lt;- mutate(ch, 
+  hour = lubridate::hour(ts),
+  text = tolower(text),
+  mention = grepl(&quot;dorian&quot;, text))
+head(ch2)</code></pre>
+<pre><code>## # A tibble: 6 x 7
+##   ts                  channel duration details     text       hour mention
+##   &lt;dttm&gt;              &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt; &lt;lgl&gt;  
+## 1 2019-09-02 00:00:00 MSNBCW        20 MSNBCW_201… &quot;nationa…     0 TRUE   
+## 2 2019-09-02 00:01:00 CNNW          59 CNNW_20190… hurrican…     0 TRUE   
+## 3 2019-09-02 00:02:00 MSNBCW        30 MSNBCW_201… new upda…     0 TRUE   
+## 4 2019-09-02 00:03:00 CNNW          45 CNNW_20190… &quot;hurrica…     0 TRUE   
+## 5 2019-09-02 00:04:00 CNNW          62 CNNW_20190… hurrican…     0 FALSE  
+## 6 2019-09-02 00:04:00 MSNBCW        49 MSNBCW_201… &quot;nationa…     0 TRUE</code></pre>
+<p>Now, let’s visualize this to see how it trended throughout the day.</p>
+<pre class="r"><code>ch2 %&gt;% filter(mention) %&gt;% 
+  count(hour, channel) %&gt;% 
+  ggplot(aes(hour, n)) +
+  geom_segment(aes(xend=hour, yend=0), 
+               color = &quot;lightslategray&quot;, size=1) + 
+  scale_x_continuous(name=&quot;Hour (GMT)&quot;, breaks=seq(0, 23, 6),
+                   labels=sprintf(&quot;%02d:00&quot;, seq(0, 23, 6))) +
+  scale_y_continuous(name=&quot;# Chyrons&quot;, limits=c(0,20)) +
+  facet_wrap(~channel, scales=&quot;free&quot;) +
+  labs(title=&quot;&#39;Dorian&#39; Mentions per Hour on 2019 Labor Day&quot;) </code></pre>
+<pre><code>## Warning: Removed 3 rows containing missing values (geom_segment).</code></pre>
+<p><img src="../../post/2019-09-22-hurricane-dorian-in-the-news_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Next, let’s examine networks. First, lets see a sample of what’s even available.</p>
+<pre class="r"><code># How about networks?
+ne &lt;- list_networks(widget=FALSE)
+head(ne,20)</code></pre>
+<pre><code>## # A tibble: 20 x 6
+##    StationID Description         Market      Network StartDate  EndDate   
+##    &lt;chr&gt;     &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;   &lt;date&gt;     &lt;date&gt;    
+##  1 ALJAZ     Al Jazeera          Internatio… ALJAZ   2017-09-11 2017-09-11
+##  2 ALJAZAM   Al Jazeera America  NationalDi… ALJAZAM 2013-08-20 2013-08-20
+##  3 BBCNEWS   BBC News            Internatio… BBCNEWS 2017-01-01 2017-01-01
+##  4 BETW      BET - San Francisc… San Franci… BET     2016-12-13 2016-12-13
+##  5 BLOOMBERG Bloomberg           National    BLOOMB… 2013-12-05 2013-12-05
+##  6 CNBC      CNBC                National    CNBC    2009-07-02 2009-07-02
+##  7 CNN       CNN                 National    CNN     2009-07-02 2009-07-02
+##  8 COM       Comedy Central      NationalSp… COM     2011-05-10 2011-05-10
+##  9 CSPAN     CSPAN               National    CSPAN   2009-06-04 2009-06-04
+## 10 CSPAN2    CSPAN2              National    CSPAN   2009-06-04 2009-06-04
+## 11 CSPAN3    CSPAN3              National    CSPAN   2012-01-26 2012-01-26
+## 12 CURRENT   CurrentTV - San Fr… San Franci… Curren… 2012-01-13 2012-01-13
+## 13 DW        DeutscheWelle       Internatio… DW      2017-09-19 2017-09-19
+## 14 FBC       FOX Business        National    FBC     2012-08-20 2012-08-20
+## 15 FOXNEWS   FOX News            National    FOXNEWS 2009-07-02 2009-07-02
+## 16 HLN       HLN - Maryland (HL… Maryland    HLN     2009-07-02 2009-07-02
+## 17 KBCW      CW - San Francisco… San Franci… CW      2010-07-16 2010-07-16
+## 18 KCAU      ABC - Sioux City (… Sioux City  ABC     2015-10-13 2015-10-13
+## 19 KCCI      CBS - Des Moines (… Des Moines  CBS     2015-10-14 2015-10-14
+## 20 KCNC      CBS - Denver (KCNC) Denver      CBS     2016-01-01 2016-01-01</code></pre>
+<p>Similar to our chryon analysis, let’s plot mentions over time. Let’s look at news coverage across a three week period instead.</p>
+<pre class="r"><code># Query Dorian data
+# Primary term = Dorian
+# Secondary term = Hurricane
+# Starting just before Labor Day weekend
+# https://rdrr.io/github/hrbrmstr/newsflash/man/query_tv.html
+dorian &lt;- query_tv(&quot;Dorian&quot;, mode = &quot;TimelineVol&quot;,
+                   start_date = &quot;2019-08-27&quot;, end_date = &quot;2019-09-12&quot;)
+head(dorian)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   network   date                 value
+##   &lt;chr&gt;     &lt;dttm&gt;               &lt;dbl&gt;
+## 1 Bloomberg 2019-08-27 12:00:00 0.0301
+## 2 Bloomberg 2019-08-28 12:00:00 0.580 
+## 3 Bloomberg 2019-08-29 12:00:00 0.573 
+## 4 Bloomberg 2019-08-30 12:00:00 1.87  
+## 5 Bloomberg 2019-08-31 12:00:00 0.314 
+## 6 Bloomberg 2019-09-01 12:00:00 0.386</code></pre>
+<p>Let’s plot this, breaking up the different networks into individual facets.</p>
+<pre class="r"><code># Visualize network coverage over 3 weeks
+# Themes causing errors, so commenting out parts
+# https://github.com/hrbrmstr/hrbrthemes
+query_tv(&#39;Dorian&#39;, mode = &quot;TimelineVol&quot;,
+                start_date = &quot;2019-08-27&quot;, end_date = &quot;2019-09-12&quot;) %&gt;% 
+        arrange(date) %&gt;% 
+        ggplot(aes(date, value, group=network)) +
+        ggalt::geom_xspline(aes(color=network)) +
+        ggthemes::scale_color_tableau(name=NULL) +
+        labs(x=NULL, y=&quot;Volume Metric&quot;, 
+             title=&quot;&#39;Dorian&#39; Trends Across National Networks&quot;) +
+        facet_wrap(~network) +
+        # theme_ipsum_rc(grid=&quot;XY&quot;) +
+        theme(legend.position=&quot;none&quot;) </code></pre>
+<p><img src="../../post/2019-09-22-hurricane-dorian-in-the-news_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>We see that coverage built up, was significant for a while, and then quickly dropped off.</p>
+<p>Another way the ‘newsflash’ package allows us to examine this topic is via a word cloud. When Dorian was mentioned, what else was said?</p>
+<pre class="r"><code># What are the top words associated with Dorian?
+# Let&#39;s do a word cloud
+wc &lt;- query_tv(&#39;Dorian&#39;, mode = &quot;WordCloud&quot;, 
+               start_date = &quot;2019-09-01&quot;, end_date = &quot;2019-09-03&quot;)
+head(wc)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   label     count
+##   &lt;chr&gt;     &lt;dbl&gt;
+## 1 Dorian    100  
+## 2 Hurricane  71.2
+## 3 Storm      59.1
+## 4 Bahamas    41.5
+## 5 Now        35.3
+## 6 Florida    35.0</code></pre>
+<p>Next, let’s plot this!</p>
+<pre class="r"><code>ggplot(wc, aes(x=1, y=1)) +
+        ggrepel::geom_label_repel(aes(label=label, size=count), segment.colour=&quot;#00000000&quot;, segment.size=0) +
+        scale_size_continuous(trans=&quot;sqrt&quot;) +
+        labs(x=NULL, y=NULL) +
+        theme_ipsum_rc(grid=&quot;&quot;) +
+        theme(axis.text=element_blank()) +
+        theme(legend.position=&quot;none&quot;) </code></pre>
+<p><img src="../../post/2019-09-22-hurricane-dorian-in-the-news_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>This isn’t my favorite word cloud viz, but it gets the job done.</p>
+<p>[THE END]</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>
