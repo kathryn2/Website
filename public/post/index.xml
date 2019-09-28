@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Hello World!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NFL Tree and Cap Spending</title>
+      <link>/post/nfl-tree-and-cap-spending/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nfl-tree-and-cap-spending/</guid>
+      <description>Let’s explore the package ‘collapsableTree’ using NFL data. I foraged the internet to create a fairly simple csv file with columns Sport, Division, Region, Team, and Cap_Spend. The values in Cap_Spend are the team’s active (2020) active salary spends per OverTheCap.com.
+Let’s get R set-up and then we can explore.
+# Set CRAN Mirror options(repos = c(CRAN = &amp;quot;http://cran.rstudio.com&amp;quot;)) # Set time zone options(tz=&amp;quot;America/New_York&amp;quot;) We’re going to use the collapsableTree library to create the visualization.</description>
+    </item>
     
     <item>
       <title>Hurricane Dorian in the News</title>
