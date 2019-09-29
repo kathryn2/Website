@@ -1,0 +1,93 @@
+---
+title: "NFL Tree and Cap Spending"
+author: "Kathryn Daugherty"
+date: '2019-09-28'
+css: []
+description: ''
+highlight: yes
+scripts: []
+slug: nfl-tree-and-cap-spending
+tags: []
+categories: []
+---
+
+
+
+<p>Let’s explore the package ‘collapsableTree’ using NFL data. I foraged the internet to create a fairly simple csv file with columns Sport, Division, Region, Team, and Cap_Spend. The values in Cap_Spend are the team’s active (2020) active salary spends per <a href="http://overthecap.com/salary-cap-space/">OverTheCap.com</a>.</p>
+<p>Let’s get R set-up and then we can explore.</p>
+<pre><code># Set CRAN Mirror
+options(repos = c(CRAN = &quot;http://cran.rstudio.com&quot;))
+
+# Set time zone
+options(tz=&quot;America/New_York&quot;)</code></pre>
+<p>We’re going to use the collapsableTree library to create the visualization. Documentation is available <a href="https://adeelk93.github.io/collapsibleTree/">here</a> and <a href="https://cran.r-project.org/web/packages/collapsibleTree/collapsibleTree.pdf">here</a>.</p>
+<pre><code># Load data set 
+library(readxl)
+Football_Caps &lt;- read_excel(&quot;~/Desktop/Football_Caps.xls&quot;)
+head(Football_Caps)</code></pre>
+<pre><code># Load needed libraries
+library(collapsibleTree)</code></pre>
+<p>The basic tree is fairly straight-forward to create.</p>
+<pre><code># Click on nodes to expand
+collapsibleTree(Football_Caps,
+            hierarchy = c(&quot;Division&quot;,&quot;Region&quot;,&quot;Team&quot;),
+            width = 500)</code></pre>
+<p>(If the above image does not show on your screen, click <a href="http://rpubs.com/Kathryn_Ann_22/533407">HERE</a> instead.)</p>
+<p>Let’s also show the salary cap information that we added. We’ll need the dplyr package to do this. To get the cumulative spending for each branch of the hierarchy, we’ll use a sum function. Make sure you hover over each node and notice that the exact salary spending is listed.</p>
+<pre><code>library(dplyr)
+
+Football_Caps %&gt;%
+  group_by(Division, Region, Team) %&gt;%
+  summarize(`Salary Spending` = sum(Cap_Spend)) %&gt;%
+collapsibleTreeSummary(
+  hierarchy = c(&quot;Division&quot;,&quot;Region&quot;,&quot;Team&quot;),
+  root = &quot;Football_Caps&quot;,
+  width = 500,
+  attribute = &quot;Salary Spending&quot;)</code></pre>
+<p>What if we just wanted variation in the colors. I like blue, so we’ll have each node be a shade of blue.</p>
+<pre><code>divisionColors &lt;- RColorBrewer::brewer.pal(length(unique(Football_Caps$Division)), &quot;Blues&quot;)
+# Regions will be a gradient that resets between divisions
+regionColors &lt;- Football_Caps %&gt;%
+  arrange(Division, Region) %&gt;% 
+  group_by(Division) %&gt;%
+  distinct(Region) %&gt;%
+  mutate(colors = colorspace::sequential_hcl(length(Region))[seq_along(Region)])
+# Teams will also be a gradient that resets between divisions, but not Regions
+teamColors &lt;- Football_Caps %&gt;%
+  arrange(Division, Region) %&gt;% 
+  group_by(Division) %&gt;%
+  distinct(Team) %&gt;%
+  mutate(colors = colorspace::sequential_hcl(length(Team))[seq_along(Team)])
+
+Football_Caps %&gt;%
+  arrange(Division, Region, Team) %&gt;%
+  collapsibleTree(
+    hierarchy = c(&quot;Division&quot;, &quot;Region&quot;, &quot;Team&quot;),
+    root = &quot;Football_Caps&quot;,
+    width = 500,
+    fill = c(divisionColors, regionColors$colors, teamColors$colors))</code></pre>
+<p>Let’s also examine the salary cap data. To first get a view of the spread, we’ll use a violin plot via the plotly package. Information on plotly is available <a href="https://plot.ly/r/">here</a> and <a href="https://plot.ly/r/violin/">here</a>.</p>
+<pre><code>library(plotly)
+
+Football_Caps %&gt;%
+  plot_ly(y = ~Cap_Spend, type = &#39;violin&#39;,
+    box = list(visible = T),
+    meanline = list(visible = T),
+    x0 = &#39;Salary Spending&#39;) %&gt;% 
+  layout(yaxis = list(title = &quot;&quot;, zeroline = F))</code></pre>
+<p><IMG SRC="/post/2019-09-28-nfl-tree-and-cap-spending_files/plot1.png"></p>
+<p>We see great dispersion in salary spending, ranging from $101M to 214M. The median is 154M USD. Let’s break this up between the AFC and NFC.</p>
+<pre><code>Football_Caps %&gt;%
+  plot_ly(x = ~Division, y = ~Cap_Spend, split = ~Division,
+    type = &#39;violin&#39;,
+    box = list(visible = T),
+    meanline = list(visible = T)) %&gt;% 
+  layout(xaxis = list(title = &quot;Division&quot;),
+         yaxis = list(title = &quot;Salary Spending&quot;,zeroline = F))</code></pre>
+<p><IMG SRC="/post/2019-09-28-nfl-tree-and-cap-spending_files/Rplot2.png"></p>
+<p>The NFC tends to spend more on players than the AFC. Let’s look at individual teams.</p>
+<pre><code>plot_ly(Football_Caps, x = ~Team, y = ~Cap_Spend, type = &#39;bar&#39;) 
+  %&gt;% layout(title = &quot;2020 Salary Spend in the NFL&quot;)</code></pre>
+<p><IMG SRC="/post/2019-09-28-nfl-tree-and-cap-spending_files/plot3.png"></p>
+<p>We see that the Jaguars spend the most while the Dolphins spend the least.</p>
+<p>[THE END]</p>
