@@ -132,8 +132,8 @@ top_count &lt;- ggplot(covid_data_filtered, aes(x=time, y=cum_dead, fill=country
 top_count</code></pre>
 <p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot04.png"></p>
 <p>We again see that China is the leader of the pack. Italy is big, but it lags China’s start by over a month. The USA does make the top 8, though it’s the most recent country to show up on this plot. Thus, one might conclude that fatalities have just begun for us.</p>
-<p>Next, let’s play around a little bit with a data visualization, ignoring best practices, to show total deaths to-date in a cumulative order and by country. Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.</p>
-<pre><code># create spiral with all countries with deaths
+<p>Next, let’s play around a little bit with a data visualization, ignoring best practices, to show total confirmed cases (positive tests) to-date in a cumulative order and by country. Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.</p>
+<pre><code># create spiral with all countries with confirmed
 # leveraging code, with edits, from https://github.com/GuangchuangYu/nCov2019/blob/master/example.R
 
 install.packages(&quot;shadowtext&quot;)
@@ -146,15 +146,16 @@ glbl_dtaset &lt;- covid_data_ts[&#39;global&#39;]
 dd &lt;- filter(glbl_dtaset, time == time(covid_data_ts)) %&gt;% 
   arrange(desc(cum_confirm)) 
 
-# prep data
-dd = dd[1:40, ]
+dd = dd[1:41, ]
 dd$country = factor(dd$country, levels=dd$country)
-cols &lt;- rev(RColorBrewer::brewer.pal(10, &quot;RdYlGn&quot;))
-dd$angle = 1:40 * 360/40
+# color specturms from colorbrewer:
+# https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html
+cols <- rev(RColorBrewer::brewer.pal(10, "RdYlBu"))
+dd$angle = 1:41 * 360/41
 label_cut = 150
-i = dd$angle &gt;= 180 &amp; dd$cum_confirm &gt; label_cut
+i = dd$angle >= 180 & dd$cum_confirm > label_cut
 dd$angle[i] = dd$angle[i] + 180
-j = dd$angle &lt; 180 &amp; dd$cum_confirm &lt; 1000
+j = dd$angle < 180 & dd$cum_confirm < 1000
 dd$angle[j] = dd$angle[j] - 90
 dd$vjust = 1
 dd$vjust[i] = 0
@@ -186,7 +187,7 @@ spiral &lt;- ggplot(dd, aes(country, cum_confirm, fill=cum_confirm)) +
   theme(legend.position=&quot;none&quot;) 
 
 ggplotify::as.ggplot(spiral, scale=1.2, vjust=-.1)</code></pre>
-<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot05.png"></p>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot06.png"></p>
 <p>Again, we see that China has felt the impacts moreso than other countries. If the USA is of interest to you, consider this <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html">NYT article</a>.</p>
 <p>John’s Hopkins is producing possibly <a href=https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">the best data out there</a>.</p>
 <p>Note: Since I'm in Orlando, let's focus on Florida, find state-specific data <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a>. At time of publish, 173 confirmed and 6 deaths.
