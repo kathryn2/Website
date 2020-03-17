@@ -168,7 +168,7 @@ top_count
 
 We again see that China is the leader of the pack.  Italy is big, but it lags China's start by over a month.  The USA does make the top 8, though it's the most recent country to show up on this plot.  Thus, one might conclude that fatalities have just begun for us.
 
-Next, let's play around a little bit with a data visualization, ignoring best practices, to show total deaths to-date in a cumulative order and by country.  Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.
+Next, let's play around a little bit with a data visualization, ignoring best practices, to show total positive tests confirmed to-date in a cumulative order and by country.  Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.
 
 ```
 # create spiral with all countries with deaths
@@ -185,10 +185,12 @@ dd <- filter(glbl_dtaset, time == time(covid_data_ts)) %>%
   arrange(desc(cum_confirm)) 
 
 # prep data
-dd = dd[1:40, ]
+dd = dd[1:41, ]
 dd$country = factor(dd$country, levels=dd$country)
-cols <- rev(RColorBrewer::brewer.pal(10, "RdYlGn"))
-dd$angle = 1:40 * 360/40
+# color specturms from colorbrewer:
+# https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html
+cols <- rev(RColorBrewer::brewer.pal(10, "RdYlBu"))
+dd$angle = 1:41 * 360/41
 label_cut = 150
 i = dd$angle >= 180 & dd$cum_confirm > label_cut
 dd$angle[i] = dd$angle[i] + 180
