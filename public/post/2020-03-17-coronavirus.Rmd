@@ -15,7 +15,7 @@ Inspired by lots of media attention (putting it mildly), let's examine some publ
 
 This work was inspired by Isaac Faber, who posted some code on his <a href="https://github.com/isaacfab/tinker/tree/master/covid19">github repo</a>.
 
-At time of publishing, the White House has issued a <a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>" from AI researchers.  Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.
+At time of publishing, the White House has issued a "<a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>" from AI researchers.  Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.
 
 ```
 # install.packages("remotes")
@@ -168,7 +168,7 @@ top_count
 
 We again see that China is the leader of the pack.  Italy is big, but it lags China's start by over a month.  The USA does make the top 8, though it's the most recent country to show up on this plot.  Thus, one might conclude that fatalities have just begun for us.
 
-Next, let's play around a little bit with a data visualization, ignoring best practices, to show total deaths to-date in a cumulative order and by country.  Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.
+Next, let's play around a little bit with a data visualization, ignoring best practices, to show total positive tests confirmed to-date in a cumulative order and by country.  Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.
 
 ```
 # create spiral with all countries with deaths
@@ -185,10 +185,12 @@ dd <- filter(glbl_dtaset, time == time(covid_data_ts)) %>%
   arrange(desc(cum_confirm)) 
 
 # prep data
-dd = dd[1:40, ]
+dd = dd[1:41, ]
 dd$country = factor(dd$country, levels=dd$country)
-cols <- rev(RColorBrewer::brewer.pal(10, "RdYlGn"))
-dd$angle = 1:40 * 360/40
+# color specturms from colorbrewer:
+# https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html
+cols <- rev(RColorBrewer::brewer.pal(10, "RdYlBu"))
+dd$angle = 1:41 * 360/41
 label_cut = 150
 i = dd$angle >= 180 & dd$cum_confirm > label_cut
 dd$angle[i] = dd$angle[i] + 180
@@ -235,8 +237,8 @@ Again, we see that China has felt the impacts moreso than other countries.  If t
 
 John's Hopkins is producing possibly <a https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">the best data out there</a>.
 
-Note: Since I'm in Orlando, let's focus on Florida.  <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a> is what the state is publishing.  At time of publish, 173 confirmed and 6 deaths.
+Note: Since I'm in Orlando, let's focus on Florida, find state-specific data <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a>. At time of publish, 173 confirmed and 6 deaths.
 
-For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f"link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here's</a> another link</a> shows the very popular two-hump visualization graphic.  <a href="https://blog.datawrapper.de/coronaviruscharts/">This</a> is another good one.
+For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f">link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'">Here's another link</a> that shows the very popular two-hump visualization graphic.  Finally, <a href="https://blog.datawrapper.de/coronaviruscharts/">this</a> is another good one.
 
 [THE END]
