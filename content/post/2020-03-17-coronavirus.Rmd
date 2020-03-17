@@ -239,6 +239,6 @@ John's Hopkins is producing possibly <a https://www.arcgis.com/apps/opsdashboard
 
 Note: Since I'm in Orlando, let's focus on Florida, find state-specific data <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a>. At time of publish, 173 confirmed and 6 deaths.
 
-For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f">link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here's</a> another link that shows the very popular two-hump visualization graphic.  Finally, <a href="https://blog.datawrapper.de/coronaviruscharts/">this</a> is another good one.
+For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f">link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'">Here's another link</a> that shows the very popular two-hump visualization graphic.  Finally, <a href="https://blog.datawrapper.de/coronaviruscharts/">this</a> is another good one.
 
 [THE END]
