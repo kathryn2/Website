@@ -1,0 +1,242 @@
+---
+title: "Coronavirus"
+author: "Kathryn Daugherty"
+date: '2020-03-17'
+css: []
+description: ''
+highlight: yes
+scripts: []
+slug: coronavirus
+tags: []
+categories: []
+---
+
+Inspired by lots of media attention (putting it mildly), let's examine some public data on COVID-19 (aka "Coronavirus") poistive tests and fatalities.
+
+This work was inspired by Isaac Faber, who posted some code on his <a href="https://github.com/isaacfab/tinker/tree/master/covid19">github repo</a>.
+
+At time of publishing, the White House has issued a <a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>" from AI researchers.  Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.
+
+```
+# install.packages("remotes")
+remotes::install_github("GuangchuangYu/nCov2019")
+# select "none"
+
+library(nCov2019)
+library(tidyverse)
+
+# Get the latest data
+x <- get_nCov2019(lang = 'en')
+head(x)
+```
+
+We've scratched the surface of the data avaiable, but it's enough to get started.  A lot of published visualizations and statistics focus on China, but we'll focus on the globe and finally the USA.
+
+Let's look at countries where there have been coronavirus-related deaths and see exactly how fatal the virus is.
+
+```
+# just the global level data
+covid_data_global <- x$global %>% 
+  filter(deadRate > 0) %>% 
+  mutate(deadRate = as.numeric(deadRate)) %>% 
+  arrange(desc(deadRate)) 
+covid_data_global
+
+lolli <- ggplot(covid_data_global, aes(x=deadRate, y=reorder(name,deadRate))) +
+  # ggplot themes:  https://ggplot2.tidyverse.org/reference/ggtheme.html
+  theme_classic() +
+  geom_point(size=2, aes(colour='red')) +
+  geom_segment(aes(x=0, xend=deadRate, y=name, yend=name)) +
+  ylab("") +
+  xlab("Death Rate (Percent)") +
+  ggtitle("Death Rate by Country",subtitle = "Percent who die with positive test") +
+  theme(legend.position = "none")
+lolli
+```
+
+<IMG SRC="/post/2020-03-17-coronavirus_files/Rplot01.png">
+
+Things look quite treacherous in Sudan, Guatemala, Ukriane and Guyana.  But why, then, do we keep hearing about China and Italy in the news?
+
+```
+# show cumulative deaths
+glbl_deaths <- x$global %>% 
+  filter(!is.na(dead)) %>%
+  filter(dead > 4) %>% 
+  mutate(dead = as.numeric(dead)) %>% 
+  arrange(desc(dead)) 
+glbl_deaths
+
+lolli2 <- ggplot(glbl_deaths, aes(x=dead, y=reorder(name,dead))) +
+  theme_classic() +
+  geom_point(size=2, aes(colour='red')) +
+  geom_segment(aes(x=0, xend=dead, y=name, yend=name)) +
+  ylab("") +
+  xlab("# Deaths") +
+  ggtitle("Deaths by Country",subtitle = "Countries with 5 deaths or more") +
+  theme(legend.position = "none")
+lolli2
+```
+
+<IMG SRC="/post/2020-03-17-coronavirus_files/Rplot02.png">
+
+While Sudan had the worst mortality rating, it doesn't even make this plot.  Thus, it's had all positive tests result in a fatality, but less than 5 fatalities in total.
+
+We see what is reflected in the news quite clearly:  China has had the most deaths due to the virus.  Next up are Italy and Iran.
+
+```
+# load historical data which is more useful for global time series
+covid_data_ts <- load_nCov2019(lang = 'en', source='github')
+head(covid_data_ts)
+
+covid_data_ts_glbl <- covid_data_ts$global
+head(covid_data_ts_glbl)
+```
+
+If you want to see a sorted list of countries (most deaths to least), the below would also get that done.
+
+```
+############ same as lollipop analysis above ############
+# find the current death count by country
+# covid_global_ttl <- covid_data_ts_glbl %>% 
+#   group_by(country) %>% 
+#   summarise(current_dead = max(cum_dead)) %>% 
+#   arrange(desc(current_dead)) %>% 
+#   filter(current_dead > 0)
+
+# current death count by country
+# covid_global_ttl
+############ same as lollipop analysis above ############
+```
+
+Next, let's look at the global impact felt by COVID-19.  How many people have died from this disease so far?
+
+```
+# sort by date and show cumulative deaths
+covid_global_daily <- covid_data_ts_glbl %>% 
+  group_by(time) %>% 
+  summarise(current_dead = max(cum_dead)) %>% 
+  arrange(desc(time))
+head(covid_global_daily)
+
+# show total death rate globally
+ttl_plt <- ggplot(covid_global_daily, aes(x=time, y=current_dead)) +
+  ylab("Cumulative Deaths") +
+  xlab("Dec '19 to Present") +
+  ggtitle("Worldwide Deaths from COVID-19") +
+  geom_line(stat="identity") + 
+  # change theme to include grid for visible reference lines
+  theme_minimal()
+ttl_plt
+```
+
+<IMG SRC="/post/2020-03-17-coronavirus_files/Rplot03.png">
+
+While this feels like a relatively new topic in the US, we see that COVID-19 fatalities actually started in December of last year.  Deaths showed tremendous increases in February and have since flattened out a bit.   Perhaps this is why "2019" follows the coronavirus term in most news?
+
+Let's expand on this by adding in colors to show the information by Country.  We'll only look at the top 8 countries (most human fatalities to-date) since it's generally hard to distinguish between categorical variables using color after that numerical threshold has been crossed.
+
+```
+# narrow down country list until 8 or less categorical variables
+# this ensures each is distinguishable
+covid_data_filtered <- covid_data_ts_glbl %>% filter(cum_dead > 29)
+
+# manually select colors that are distinct from one another
+# https://medialab.github.io/iwanthue/
+fill_manual <- c("#77b592",
+                 "#7e46b8",
+                 "#91cf53",
+                 "#c2568d",
+                 "#be9c56",
+                 "#8e98c4",
+                 "#c4513a",
+                 "#4c3b3c")
+
+top_count <- ggplot(covid_data_filtered, aes(x=time, y=cum_dead, fill=country)) +
+  geom_area() + 
+  ggtitle('Confirmed Global Deaths From COVID 19', subtitle = 'running total by countries with 30+ deaths as of March 17, 2020') +
+  ylab("") +
+  xlab("") +
+  # change theme to include grid for visible reference lines
+  theme_minimal() +
+  scale_fill_manual(values=fill_manual) +
+  theme(legend.title=element_blank())
+top_count
+```
+
+<IMG SRC="/post/2020-03-17-coronavirus_files/Rplot04.png">
+
+We again see that China is the leader of the pack.  Italy is big, but it lags China's start by over a month.  The USA does make the top 8, though it's the most recent country to show up on this plot.  Thus, one might conclude that fatalities have just begun for us.
+
+Next, let's play around a little bit with a data visualization, ignoring best practices, to show total deaths to-date in a cumulative order and by country.  Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.
+
+```
+# create spiral with all countries with deaths
+# leveraging code, with edits, from https://github.com/GuangchuangYu/nCov2019/blob/master/example.R
+
+install.packages("shadowtext")
+install.packages("ggplotify")
+require(shadowtext)
+require(ggplotify)
+
+glbl_dtaset <- covid_data_ts['global']
+
+dd <- filter(glbl_dtaset, time == time(covid_data_ts)) %>% 
+  arrange(desc(cum_confirm)) 
+
+# prep data
+dd = dd[1:40, ]
+dd$country = factor(dd$country, levels=dd$country)
+cols <- rev(RColorBrewer::brewer.pal(10, "RdYlGn"))
+dd$angle = 1:40 * 360/40
+label_cut = 150
+i = dd$angle >= 180 & dd$cum_confirm > label_cut
+dd$angle[i] = dd$angle[i] + 180
+j = dd$angle < 180 & dd$cum_confirm < 1000
+dd$angle[j] = dd$angle[j] - 90
+dd$vjust = 1
+dd$vjust[i] = 0
+dd$vjust[j] = 0.5
+dd$covid_data_ts = dd$cum_confirm *.8
+dd$covid_data_ts[j] = dd$covid_data_ts[j] * .7
+```
+
+Now that the data has been prepared, we can plot it.
+
+```
+# plot data
+spiral <- ggplot(dd, aes(country, cum_confirm, fill=cum_confirm)) + 
+  geom_col(width=1, color='grey90') + 
+  geom_col(aes(y=I(5)), width=1, fill='grey90', alpha = .2) +       
+  geom_col(aes(y=I(3)), width=1, fill='grey90', alpha = .2) +    
+  geom_col(aes(y=I(2)), width=1, fill = "white") +
+  scale_y_log10() + 
+  scale_fill_gradientn(colors=cols, trans="log") + 
+  geom_shadowtext(aes(label=paste(country, cum_confirm, sep="\n"), 
+                      y = covid_data_ts, angle=angle, 
+                      vjust=vjust), 
+                  data=function(glbl_dtaset) glbl_dtaset[glbl_dtaset$cum_confirm > label_cut,], 
+                  size=3, colour = "white", bg.colour="black", 
+                  fontface="bold")  + 
+  geom_text(aes(label=paste0(cum_confirm, ", ", country), 
+                y = max(cum_confirm) * 2,  
+                angle=angle+90), 
+            data=function(glbl_dtaset) glbl_dtaset[glbl_dtaset$cum_confirm < label_cut,], 
+            size=3, vjust=1) + 
+  coord_polar(direction=-1) + 
+  theme_void() + 
+  theme(legend.position="none") 
+
+ggplotify::as.ggplot(spiral, scale=1.2, vjust=-.1)
+```
+<IMG SRC="/post/2020-03-17-coronavirus_files/Rplot05.png">
+
+Again, we see that China has felt the impacts moreso than other countries.  If the USA is of interest to you, consider this <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html">NYT article</a>.
+
+John's Hopkins is producing possibly <a https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">the best data out there</a>.
+
+Note: Since I'm in Orlando, let's focus on Florida.  <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a> is what the state is publishing.  At time of publish, 173 confirmed and 6 deaths.
+
+For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f"link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here's</a> another link</a> shows the very popular two-hump visualization graphic.  <a href="https://blog.datawrapper.de/coronaviruscharts/">This</a> is another good one.
+
+[THE END]

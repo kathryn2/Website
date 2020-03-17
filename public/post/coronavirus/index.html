@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Coronavirus">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2020-03-17">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/coronavirus/">
+    <meta property="og:site_name" content="Hello World!">
+    
+    <meta name="generator" content="Hugo 0.58.2" />
+    <title>Coronavirus &middot; Hello World!</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Hello World!" />
+    
+    
+    <link rel="icon" href="../../coffee_to_go_icon_124542.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Kathryn A Daugherty</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Kathryn A Daugherty</a></h1>
+		
+		
+		
+		
+		
+			<img id="profile-pic" src="//img/kathryn_img.jpg" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://www.linkedin.com/in/kathryn22/"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://www.instagram.com/kathryn2ann/"><i class="fa fa-instagram fa-2x"></i></a>
+			
+				<a href="https://www.facebook.com/kathryn22ann"><i class="fa fa-facebook fa-2x"></i></a>
+			
+				<a href="https://public.tableau.com/profile/kathryn.khaki.daugherty"><i class="fa fa-laptop fa-2x"></i></a>
+			
+				<a href="https://github.com/kathryn2"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://my.playstation.com/profile/Kathryn_D"><i class="fa fa-gamepad fa-2x"></i></a>
+			
+
+			<a href="mailto:kadplaystennis@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Coronavirus</h1>
+	</header>
+
+	<article>
+		
+
+
+<p>Inspired by lots of media attention (putting it mildly), let’s examine some public data on COVID-19 (aka “Coronavirus”) poistive tests and fatalities.</p>
+<p>This work was inspired by Isaac Faber, who posted some code on his <a href="https://github.com/isaacfab/tinker/tree/master/covid19">github repo</a>.</p>
+<p>At time of publishing, the White House has issued a <a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>&quot; from AI researchers. Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.</p>
+<pre><code># install.packages(&quot;remotes&quot;)
+remotes::install_github(&quot;GuangchuangYu/nCov2019&quot;)
+# select &quot;none&quot;
+
+library(nCov2019)
+library(tidyverse)
+
+# Get the latest data
+x &lt;- get_nCov2019(lang = &#39;en&#39;)
+head(x)</code></pre>
+<p>We’ve scratched the surface of the data avaiable, but it’s enough to get started. A lot of published visualizations and statistics focus on China, but we’ll focus on the globe and finally the USA.</p>
+<p>Let’s look at countries where there have been coronavirus-related deaths and see exactly how fatal the virus is.</p>
+<pre><code># just the global level data
+covid_data_global &lt;- x$global %&gt;% 
+  filter(deadRate &gt; 0) %&gt;% 
+  mutate(deadRate = as.numeric(deadRate)) %&gt;% 
+  arrange(desc(deadRate)) 
+covid_data_global
+
+lolli &lt;- ggplot(covid_data_global, aes(x=deadRate, y=reorder(name,deadRate))) +
+  # ggplot themes:  https://ggplot2.tidyverse.org/reference/ggtheme.html
+  theme_classic() +
+  geom_point(size=2, aes(colour=&#39;red&#39;)) +
+  geom_segment(aes(x=0, xend=deadRate, y=name, yend=name)) +
+  ylab(&quot;&quot;) +
+  xlab(&quot;Death Rate (Percent)&quot;) +
+  ggtitle(&quot;Death Rate by Country&quot;,subtitle = &quot;Percent who die with positive test&quot;) +
+  theme(legend.position = &quot;none&quot;)
+lolli</code></pre>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot01.png"></p>
+<p>Things look quite treacherous in Sudan, Guatemala, Ukriane and Guyana. But why, then, do we keep hearing about China and Italy in the news?</p>
+<pre><code># show cumulative deaths
+glbl_deaths &lt;- x$global %&gt;% 
+  filter(!is.na(dead)) %&gt;%
+  filter(dead &gt; 4) %&gt;% 
+  mutate(dead = as.numeric(dead)) %&gt;% 
+  arrange(desc(dead)) 
+glbl_deaths
+
+lolli2 &lt;- ggplot(glbl_deaths, aes(x=dead, y=reorder(name,dead))) +
+  theme_classic() +
+  geom_point(size=2, aes(colour=&#39;red&#39;)) +
+  geom_segment(aes(x=0, xend=dead, y=name, yend=name)) +
+  ylab(&quot;&quot;) +
+  xlab(&quot;# Deaths&quot;) +
+  ggtitle(&quot;Deaths by Country&quot;,subtitle = &quot;Countries with 5 deaths or more&quot;) +
+  theme(legend.position = &quot;none&quot;)
+lolli2</code></pre>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot02.png"></p>
+<p>While Sudan had the worst mortality rating, it doesn’t even make this plot. Thus, it’s had all positive tests result in a fatality, but less than 5 fatalities in total.</p>
+<p>We see what is reflected in the news quite clearly: China has had the most deaths due to the virus. Next up are Italy and Iran.</p>
+<pre><code># load historical data which is more useful for global time series
+covid_data_ts &lt;- load_nCov2019(lang = &#39;en&#39;, source=&#39;github&#39;)
+head(covid_data_ts)
+
+covid_data_ts_glbl &lt;- covid_data_ts$global
+head(covid_data_ts_glbl)</code></pre>
+<p>If you want to see a sorted list of countries (most deaths to least), the below would also get that done.</p>
+<pre><code>############ same as lollipop analysis above ############
+# find the current death count by country
+# covid_global_ttl &lt;- covid_data_ts_glbl %&gt;% 
+#   group_by(country) %&gt;% 
+#   summarise(current_dead = max(cum_dead)) %&gt;% 
+#   arrange(desc(current_dead)) %&gt;% 
+#   filter(current_dead &gt; 0)
+
+# current death count by country
+# covid_global_ttl
+############ same as lollipop analysis above ############</code></pre>
+<p>Next, let’s look at the global impact felt by COVID-19. How many people have died from this disease so far?</p>
+<pre><code># sort by date and show cumulative deaths
+covid_global_daily &lt;- covid_data_ts_glbl %&gt;% 
+  group_by(time) %&gt;% 
+  summarise(current_dead = max(cum_dead)) %&gt;% 
+  arrange(desc(time))
+head(covid_global_daily)
+
+# show total death rate globally
+ttl_plt &lt;- ggplot(covid_global_daily, aes(x=time, y=current_dead)) +
+  ylab(&quot;Cumulative Deaths&quot;) +
+  xlab(&quot;Dec &#39;19 to Present&quot;) +
+  ggtitle(&quot;Worldwide Deaths from COVID-19&quot;) +
+  geom_line(stat=&quot;identity&quot;) + 
+  # change theme to include grid for visible reference lines
+  theme_minimal()
+ttl_plt</code></pre>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot03.png"></p>
+<p>While this feels like a relatively new topic in the US, we see that COVID-19 fatalities actually started in December of last year. Deaths showed tremendous increases in February and have since flattened out a bit. Perhaps this is why “2019” follows the coronavirus term in most news?</p>
+<p>Let’s expand on this by adding in colors to show the information by Country. We’ll only look at the top 8 countries (most human fatalities to-date) since it’s generally hard to distinguish between categorical variables using color after that numerical threshold has been crossed.</p>
+<pre><code># narrow down country list until 8 or less categorical variables
+# this ensures each is distinguishable
+covid_data_filtered &lt;- covid_data_ts_glbl %&gt;% filter(cum_dead &gt; 29)
+
+# manually select colors that are distinct from one another
+# https://medialab.github.io/iwanthue/
+fill_manual &lt;- c(&quot;#77b592&quot;,
+                 &quot;#7e46b8&quot;,
+                 &quot;#91cf53&quot;,
+                 &quot;#c2568d&quot;,
+                 &quot;#be9c56&quot;,
+                 &quot;#8e98c4&quot;,
+                 &quot;#c4513a&quot;,
+                 &quot;#4c3b3c&quot;)
+
+top_count &lt;- ggplot(covid_data_filtered, aes(x=time, y=cum_dead, fill=country)) +
+  geom_area() + 
+  ggtitle(&#39;Confirmed Global Deaths From COVID 19&#39;, subtitle = &#39;running total by countries with 30+ deaths as of March 17, 2020&#39;) +
+  ylab(&quot;&quot;) +
+  xlab(&quot;&quot;) +
+  # change theme to include grid for visible reference lines
+  theme_minimal() +
+  scale_fill_manual(values=fill_manual) +
+  theme(legend.title=element_blank())
+top_count</code></pre>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot04.png"></p>
+<p>We again see that China is the leader of the pack. Italy is big, but it lags China’s start by over a month. The USA does make the top 8, though it’s the most recent country to show up on this plot. Thus, one might conclude that fatalities have just begun for us.</p>
+<p>Next, let’s play around a little bit with a data visualization, ignoring best practices, to show total deaths to-date in a cumulative order and by country. Code inspired by <a href="https://github.com/GuangchuangYu/nCov2019/blob/master/example.R">GuangchuangYu</a>.</p>
+<pre><code># create spiral with all countries with deaths
+# leveraging code, with edits, from https://github.com/GuangchuangYu/nCov2019/blob/master/example.R
+
+install.packages(&quot;shadowtext&quot;)
+install.packages(&quot;ggplotify&quot;)
+require(shadowtext)
+require(ggplotify)
+
+glbl_dtaset &lt;- covid_data_ts[&#39;global&#39;]
+
+dd &lt;- filter(glbl_dtaset, time == time(covid_data_ts)) %&gt;% 
+  arrange(desc(cum_confirm)) 
+
+# prep data
+dd = dd[1:40, ]
+dd$country = factor(dd$country, levels=dd$country)
+cols &lt;- rev(RColorBrewer::brewer.pal(10, &quot;RdYlGn&quot;))
+dd$angle = 1:40 * 360/40
+label_cut = 150
+i = dd$angle &gt;= 180 &amp; dd$cum_confirm &gt; label_cut
+dd$angle[i] = dd$angle[i] + 180
+j = dd$angle &lt; 180 &amp; dd$cum_confirm &lt; 1000
+dd$angle[j] = dd$angle[j] - 90
+dd$vjust = 1
+dd$vjust[i] = 0
+dd$vjust[j] = 0.5
+dd$covid_data_ts = dd$cum_confirm *.8
+dd$covid_data_ts[j] = dd$covid_data_ts[j] * .7</code></pre>
+<p>Now that the data has been prepared, we can plot it.</p>
+<pre><code># plot data
+spiral &lt;- ggplot(dd, aes(country, cum_confirm, fill=cum_confirm)) + 
+  geom_col(width=1, color=&#39;grey90&#39;) + 
+  geom_col(aes(y=I(5)), width=1, fill=&#39;grey90&#39;, alpha = .2) +       
+  geom_col(aes(y=I(3)), width=1, fill=&#39;grey90&#39;, alpha = .2) +    
+  geom_col(aes(y=I(2)), width=1, fill = &quot;white&quot;) +
+  scale_y_log10() + 
+  scale_fill_gradientn(colors=cols, trans=&quot;log&quot;) + 
+  geom_shadowtext(aes(label=paste(country, cum_confirm, sep=&quot;\n&quot;), 
+                      y = covid_data_ts, angle=angle, 
+                      vjust=vjust), 
+                  data=function(glbl_dtaset) glbl_dtaset[glbl_dtaset$cum_confirm &gt; label_cut,], 
+                  size=3, colour = &quot;white&quot;, bg.colour=&quot;black&quot;, 
+                  fontface=&quot;bold&quot;)  + 
+  geom_text(aes(label=paste0(cum_confirm, &quot;, &quot;, country), 
+                y = max(cum_confirm) * 2,  
+                angle=angle+90), 
+            data=function(glbl_dtaset) glbl_dtaset[glbl_dtaset$cum_confirm &lt; label_cut,], 
+            size=3, vjust=1) + 
+  coord_polar(direction=-1) + 
+  theme_void() + 
+  theme(legend.position=&quot;none&quot;) 
+
+ggplotify::as.ggplot(spiral, scale=1.2, vjust=-.1)</code></pre>
+<p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot05.png"></p>
+<p>Again, we see that China has felt the impacts moreso than other countries. If the USA is of interest to you, consider this <a href="https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html">NYT article</a>.</p>
+<p>John’s Hopkins is producing possibly <a https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">the best data out there</a>.</p>
+<p>Note: Since I’m in Orlando, let’s focus on Florida. <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a> is what the state is publishing. At time of publish, 173 confirmed and 6 deaths.</p>
+<p>For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f"link</a>. <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here’s</a> another link</a> shows the very popular two-hump visualization graphic. <a href="https://blog.datawrapper.de/coronaviruscharts/">This</a> is another good one.</p>
+<p>[THE END]</p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>
