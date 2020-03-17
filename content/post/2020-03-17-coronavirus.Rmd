@@ -15,7 +15,7 @@ Inspired by lots of media attention (putting it mildly), let's examine some publ
 
 This work was inspired by Isaac Faber, who posted some code on his <a href="https://github.com/isaacfab/tinker/tree/master/covid19">github repo</a>.
 
-At time of publishing, the White House has issued a <a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>" from AI researchers.  Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.
+At time of publishing, the White House has issued a "<a href="https://techcrunch.com/2020/03/16/coronavirus-machine-learning-cord-19-chan-zuckerberg-ostp/">call to action</a>" from AI researchers.  Public data has been made avaiable <a href="https://pages.semanticscholar.org/coronavirus-research">here</a>.
 
 ```
 # install.packages("remotes")
@@ -237,6 +237,6 @@ John's Hopkins is producing possibly <a https://www.arcgis.com/apps/opsdashboard
 
 Note: Since I'm in Orlando, let's focus on Florida, find state-specific data <a href="http://www.floridahealth.gov/diseases-and-conditions/covid-19/">here</a>. At time of publish, 173 confirmed and 6 deaths.
 
-For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f">link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here's</a> Another link</a> shows the very popular two-hump visualization graphic.  Finally, <a href="https://blog.datawrapper.de/coronaviruscharts/">this</a> is another good one.
+For more information and visualizations on the Coronavirus, I recommend this <a href="https://towardsdatascience.com/top-5-r-resources-on-covid-19-coronavirus-1d4c8df6d85f">link</a>.  <a href="https://www.visualcapitalist.com/infection-trajectory-flattening-the-covid19-curve/'>Here's</a> another link that shows the very popular two-hump visualization graphic.  Finally, <a href="https://blog.datawrapper.de/coronaviruscharts/">this</a> is another good one.
 
 [THE END]
