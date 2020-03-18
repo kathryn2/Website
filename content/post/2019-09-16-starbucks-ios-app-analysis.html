@@ -14,7 +14,7 @@ scripts: []
 
 
 <p>Have you ever wanted to see more detail behind apps on your iOS device? There’s an R package called ‘itunesr’ that allows for free extracts of user ratings and reviews. Combining that with some sentiment analysis, you can examine any trends for apps of interest.</p>
-<p>First, you’ll need to identify an app of interest. I use the <br>Starbucks</br> app quite a bit and have read numerous articles about it’s success. So, let’s see if ‘itunesr’ tells a smiliar story.</p>
+<p>First, you’ll need to identify an app of interest. I use the <br>Starbucks</br> app quite a bit and have read numerous articles about it’s success. So, let’s see if ‘itunesr’ tells a similar story.</p>
 <p>Let’s install the needed programs.</p>
 <pre class="r"><code># Set CRAN Mirror
 options(repos = c(CRAN = &quot;http://cran.rstudio.com&quot;))
@@ -89,7 +89,7 @@ dt &lt;- dt %&gt;% select(Date,Rating) %&gt;% group_by(Date) %&gt;% summarise(Ra
 <pre><code># Plot
 highchart() %&gt;%   hc_add_series_times_values(dt$Date,dt$Rating, name = &#39;Average Rating&#39;)</code></pre>
 <p><img src = "/post/2019-09-16-starbucks-ios-app-analysis_files/avg_rating.png"></p>
-<p>We see that the rating is generally pretty high. But, this doesn’t take advantage of all the text users have provided. To measure that, let’s use Bing’s defined sentiments to illustrate how postivie/negative the feedback is.</p>
+<p>We see that the rating is generally pretty high. But, this doesn’t take advantage of all the text users have provided. To measure that, let’s use Bing’s defined sentiments to illustrate how positive/negative the feedback is.</p>
 <pre class="r"><code># Sentiment Analysis 
 install.packages(&quot;sentimentr&quot;)</code></pre>
 <pre><code>## Installing package into &#39;/Users/kathryn_daugherty/Library/R/3.5/library&#39;
@@ -122,7 +122,7 @@ get_sentiments(&quot;bing&quot;)</code></pre>
 reviews_only &lt;- as.character(sbux_reviews$Review)
 head(reviews_only,2)</code></pre>
 <pre><code>## [1] &quot;The new Starbucks store in Kearny NJ us ridiculously slow. When I use the app, it has taken up to 50 minutes to get my order.  One time, I waited and asked them to verify that they had received my order. They said they had, then 10 minutes later, said they had run out of the product. It’s a new store and perhaps they are working thru some kinks but they need to resolve this soon.&quot;
-## [2] &quot;Love this app! It was beautifully designed (great UI/UX) and functions virtually flawlessly. Not a huge deal, but my only suggestion would be to be able to load an exiting gift card with another gift card’s balance, rather than having to create a new card, transfer the balance, then delete the card. Thank you.&quot;</code></pre>
+## [2] &quot;Love this app! It was beautifully designed (great UI/UX) and functions virtually flawlessly. Not a huge deal, but my only suggestion would be to be able to load an existing gift card with another gift card’s balance, rather than having to create a new card, transfer the balance, then delete the card. Thank you.&quot;</code></pre>
 <pre class="r"><code>sentiment_scores &lt;- reviews_only %&gt;% sentiment_by(by=NULL)</code></pre>
 <pre><code># plot findings
 highchart() %&gt;% hc_xAxis(sentiment_scores$element_id) %&gt;% hc_add_series(sentiment_scores$ave_sentiment, name = &#39;Reviews Sentiment Scores&#39;)</code></pre>
