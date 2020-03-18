@@ -13,7 +13,7 @@ scripts: []
 
 Have you ever wanted to see more detail behind apps on your iOS device?  There's an R package called 'itunesr' that allows for free extracts of user ratings and reviews.  Combining that with some sentiment analysis, you can examine any trends for apps of interest.
 
-First, you'll need to identify an app of interest.  I use the <br>Starbucks</br> app quite a bit and have read numerous articles about it's success.  So, let's see if 'itunesr' tells a smiliar story.  
+First, you'll need to identify an app of interest.  I use the <br>Starbucks</br> app quite a bit and have read numerous articles about it's success.  So, let's see if 'itunesr' tells a similar story.  
 
 Let's install the needed programs.
 
@@ -62,7 +62,7 @@ highchart() %>%   hc_add_series_times_values(dt$Date,dt$Rating, name = 'Average 
 ```
 <img src = "/post/2019-09-16-starbucks-ios-app-analysis_files/avg_rating.png">
 
-We see that the rating is generally pretty high.  But, this doesn't take advantage of all the text users have provided.  To measure that, let's use Bing's defined sentiments to illustrate how postivie/negative the feedback is.
+We see that the rating is generally pretty high.  But, this doesn't take advantage of all the text users have provided.  To measure that, let's use Bing's defined sentiments to illustrate how positive/negative the feedback is.
 
 ```{r}
 # Sentiment Analysis 
