@@ -38,7 +38,7 @@ preseason <- read_excel("~/Desktop/DaughertyData.xlsx",
 
 (FYI:  MOASS = Mother of all spreadsheets.)
 
-This was done when I was just starting to use R, so please foregive some of the ineffiencies and certainly the following long list of pacakges pulled in.
+This was done when I was just starting to use R, so please forgive some of the inefficiencies and certainly the following long list of packages pulled in.
 
 ```
 # load needed libraries
