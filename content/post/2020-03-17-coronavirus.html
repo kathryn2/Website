@@ -48,7 +48,7 @@ lolli &lt;- ggplot(covid_data_global, aes(x=deadRate, y=reorder(name,deadRate)))
   theme(legend.position = &quot;none&quot;)
 lolli</code></pre>
 <p><IMG SRC="/post/2020-03-17-coronavirus_files/Rplot01.png"></p>
-<p>Things look quite treacherous in Sudan, Guatemala, Ukriane and Guyana. But why, then, do we keep hearing about China and Italy in the news?</p>
+<p>Things look quite treacherous in Sudan, Guatemala, Ukraine and Guyana. But why, then, do we keep hearing about China and Italy in the news?</p>
 <pre><code># show cumulative deaths
 glbl_deaths &lt;- x$global %&gt;% 
   filter(!is.na(dead)) %&gt;%
